@@ -1,0 +1,92 @@
+.sidebaruser {
+    position: sticky;
+    top: 20px;
+}
+.sidebaruser .buttons a {
+    border: 1px solid var(--bg-main-sombra-2);
+    border-radius: 3px;
+}
+.sidebaruser .buttons a.active {
+    border-left: 3px solid var(--sombra-main-3);
+}
+
+.mytooltip {
+    display: none;
+    min-width: 100%;
+    transition: all 1s ease;
+}
+.mytooltip::before {
+    content: attr(data-title);
+    position: absolute;
+    border-radius: 3px;
+    background-color: var(--naranja);
+    padding: 10px;
+    top: -55px;
+    color: white;
+    min-width: 300px;
+    text-transform: lowercase;
+    box-shadow: 3px 3px 3px 1px rgba(0,0,0,.3);
+    z-index: 10;
+}
+.mytooltip::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 47%;
+    width: 15px;
+    height: 16px;
+    background-color: var(--naranja);
+    box-shadow: 5px 5px 3px 1px rgba(0,0,0,.3);
+    transform: translateX(-50%) rotate(45deg);
+    z-index: 11;
+}
+
+.personaldata input {
+    min-height: 32px;
+}
+
+.message .content::before {
+    position: absolute;
+    content: "";
+    width: 15px;
+    height: 15px;
+    background-color: var(--complementario);
+    transform: translateX(-50%) rotate(45deg);
+}
+.message.admin .content::before {
+    top: -5px;
+    left: 33px;
+}
+.message.user .content::before {
+    top: -5px;
+    right: 15px;
+}
+.message.content .error.message::before {
+    width: 0;
+    height: 0;
+}
+.message a:hover {
+    color: var(--sombra-main-4);
+}
+.messages-container .write-message textarea {
+    color: var(--sombra-main-4)
+}
+#form-message .field:focus-within {
+    box-shadow: 0 0 3px 1px rgba(0,0,0,.3);
+}
+
+@media(max-width: 990px){
+    .sidebaruser {
+        position: static;
+        margin-bottom: 50px;
+    }
+}
+@media(max-width: 768px){
+    .sidebaruser .buttons a {
+        padding: 16px 0;
+    }
+    .spinner-grow {
+        width: 20px;
+        height: 20px;
+    }
+}
