@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Route, Redirect } from "react-router-dom";
 import { urlbase } from "../services/getInfoPage";
-import { responsiveHideSubmenues, saveUserPreference } from "../services/index";
+import { responsiveHideSubmenues, saveUserPreference, getFavourite } from "../services/index";
 
 // Components.
 import Index from "./Index";
@@ -16,7 +16,7 @@ export default function Main(props) {
     const [ width, setWidth ] = useState(0)
     const [ products, setProducts ] = useState([])
     const [ path, setPath ] = useState(window.location.pathname)
-    const [ favourites, setFavourites ] = useState([])
+    // const [ favourites, setFavourites ] = useState([])
 
     const getProducts = async () => {
         const request = await fetch(urlbase + "/api/product/");
@@ -54,7 +54,7 @@ export default function Main(props) {
 
                 if(session.data.user.datasession.favourite.length){
                     session.data.user.datasession.favourite.map( fId => {
-                        const cards = document.querySelectorAll(fId);
+                        const cards = document.querySelectorAll(`.card${fId} .fa-heart`);
 
                         if(cards){
                            cards.forEach( card => {
@@ -80,24 +80,6 @@ export default function Main(props) {
         }
 
     },[user])
-
-    const getFavourite = () => {
-
-        const favourite = JSON.parse(localStorage.getItem('favourite'));
-
-        if(favourite){
-            favourite.ids.map( fId => {
-                const cards = document.querySelectorAll(fId);
-
-                if(cards){
-                   cards.forEach( card => {
-                       card.classList.replace('far','fas');
-                   })
-                }
-                return 'done';
-            })
-        }
-    }
 
     const deleteItem = useCallback(() => {
         const closeicon = document.querySelectorAll('.submenu.cart .content .fa-window-close');
@@ -197,8 +179,6 @@ export default function Main(props) {
                     setItems={setItems}
                     path={path}
                     setPath={setPath}
-                    favourites={favourites}
-                    setFavourites={setFavourites}
                 />
             </Route>
             <Route path="/admin">

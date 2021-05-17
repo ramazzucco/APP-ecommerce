@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { urlbase } from "../../services/getInfoPage";
 import { submit } from '../../services/handlerForm';
@@ -8,18 +8,13 @@ import Textarea from '../form/Textarea';
 
 export default function Messages(props) {
 
-    const [ datapost, setDatapost ] = useState({})
-
-    useEffect(() => {
-        setDatapost(defaultdatapost)
-    },[])
-
-    const defaultdatapost = {
+    const [ defaultdatapost ] = useState({
         from_name: `${props.user.user.first_name} ${props.user.user.last_name}`,
         to_id: props.admin ? props.admin.id : 0,
         to_name: 'ADMIN',
         users_id: props.user.user.id
-    }
+    })
+    const [ datapost, setDatapost ] = useState(defaultdatapost)
 
     const handlerChange = (e) => {
         setDatapost({...datapost, [e.target.name]: e.target.value})

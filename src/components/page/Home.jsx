@@ -111,8 +111,6 @@ export default function Home(props) {
                 items={props.items}
                 setItems={props.setItems}
                 user={props.user}
-                favourites={props.favourites}
-                setFavourites={props.setFavourites}
             />
 
             <div className="banner" style={{margin: "100px 0"}}>

@@ -72,10 +72,10 @@ export default function Mydata(props) {
                 <h4 className=''>Mis Datos</h4>
                 <i className="fa fa-chevron-down ml-auto"></i>
             </header>
-            <section className='col-12 p-0 d-flex border-top'>
+            <section className='col-12 p-0 d-flex flex-column flex-sm-row border-top'>
                 <form
                     id='updateavatar'
-                    className='col-5 d-flex flex-wrap align-items-center justify-content-center p-3'
+                    className='col-12 col-sm-5 d-flex flex-wrap align-items-center justify-content-center p-3'
                 >
                     <label htmlFor='newavatar' className="userimage col-12 p-0 d-flex flex-column align-items-center">
                         <span
@@ -121,15 +121,15 @@ export default function Mydata(props) {
                         onChange={handlerSubmit}
                     />
                 </form>
-                <div className="data col-7 d-flex p-3">
-                    <ul className='list-unstyled col-3 p-0 text-right'>
+                <div className="data col-12 col-sm-7 d-flex p-3">
+                    <ul className='list-unstyled col-5 col-sm-3 p-0 text-right'>
                         <li className='mb-3'>Nombre</li>
                         <li className='mb-3'>Apellido</li>
                         <li className='mb-3'>email</li>
                         <li className='mb-3'>Direccion</li>
                         <li className='mb-3'>Ciudad</li>
                     </ul>
-                    <ul className='list-unstyled col-9 p-0 pl-3 text-muted'>
+                    <ul className='list-unstyled col-7 col-sm-9 p-0 pl-3 text-muted'>
                         <li className='mb-3'>{user.first_name}</li>
                         <li className='mb-3'>{user.last_name}</li>
                         <li className='mb-3'>{user.email}</li>

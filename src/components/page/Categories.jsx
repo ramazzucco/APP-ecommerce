@@ -21,7 +21,7 @@ export default function Categories(props) {
     const [ error, setError ] = useState('')
 
     const datacard = {
-        cardID: 'card-category',
+        cardID: props.products[0].category_title,
         card:{
             classname:{
                 card: `card-category col-10 py-3 d-none mb-2 bg-white border rounded`,
@@ -32,13 +32,18 @@ export default function Categories(props) {
                 infoName: `w-100 name text-left mb-0 ${props.width < 768 ? 'text-truncate' : ''}`,
                 infoPrice: "h5 price inline-block mb-0",
                 infoDiscount: "inline-block discount mb-0 ml-3",
-                divButtons: "buy d-flex flex-column justify-content-between align-items-end col-2 text-center p-0",
+                divButtons: "buy d-flex flex-column align-items-end justify-content-end col-2 text-center p-0",
                 linkbutton: "d-flex col-10 px-0",
                 button: "rm-btn rm-orange ml-2",
             },
             style: {
                 minHeight: `${props.width < 768 ? '120px' : '150px'}`,
                 maxHeight: `${props.width < 768 ? '120px' : '150px'}`
+            },
+            stylediviconfavourite: {
+                position: 'absolute',
+                top: '0',
+                right: '0'
             }
         },
     } ;
@@ -177,7 +182,7 @@ export default function Categories(props) {
             <h2 className="col-12 text-left bg-main-contrast-3 text-capitalize my-4 pl-4 mb-5 border-bottom">
                 {category}
             </h2>
-            <div className="orderby col-11 p-0 col-md-3 mx-auto" onClick={showOrderBy}>
+            <div className="orderby col-11 pl-4 pr-0 col-md-3 mx-auto" onClick={showOrderBy}>
                 <div className="headertitle d-flex align-items-center mb-1 border-bottom">
                     <p className='title mb-1'>Ordenar por :</p>
                     <i className="fa fa-chevron-up d-flex d-md-none ml-4"></i>
@@ -192,7 +197,9 @@ export default function Categories(props) {
                     }
                 </div>
             </div>
-            <div className="containercards col-12 col-md-9 p-0 mt-3 mt-md-0 d-flex flex-column align-items-center">
+            <div className={`containercards ${props.products[0].category_title}
+                col-12 col-md-9 p-0 mt-3 mt-md-0 d-flex flex-column align-items-center`}
+            >
                 {
                     products
                         ? products.map((product, i) => {
@@ -204,6 +211,8 @@ export default function Categories(props) {
                                     product={product}
                                     items={props.items}
                                     setItems={props.setItems}
+                                    favourites={props.favourites}
+                                    setFavourites={props.setFavourites}
                                 />
                             );
                         })

@@ -9,11 +9,21 @@ export default function Card(props) {
     const datacard = props ? props.datacard : '';
     const user = props.user ? props.user.user : '';
 
+    const handlerOnMouseOver = (e, Pid, CardId) => {
+        document.querySelector(`.${CardId} .card${Pid} .info .name`).classList.remove('text-truncate')
+    }
+
+    const handlerOnMouseOut = (e, Pid, CardId) => {
+        document.querySelector(`.${CardId} .card${Pid} .info .name`).classList.add('text-truncate')
+    }
+
     return (
         <article
             key={product.id}
             className={datacard.card.classname.card + ' card' + product.id}
             style={datacard.card.style}
+            onMouseOver={(e) => handlerOnMouseOver(e,product.id,datacard.cardID)}
+            onMouseOut={(e) => handlerOnMouseOut(e,product.id,datacard.cardID)}
         >
             <Link
                 to={`/page/${product.category_id}/${product.id}`}
@@ -25,7 +35,6 @@ export default function Card(props) {
                         src={urlbase + `/images/${product.image}`}
                         alt={product.name}
                         width={datacard.card.classname.imagewidth}
-                        height={datacard.card.classname.imageheight ? datacard.card.classname.imageheight : ''}
                     />
                 </div>
                 <div className={datacard.card.classname.info}>
@@ -45,24 +54,22 @@ export default function Card(props) {
                 </div>
             </Link>
             <div className={datacard.card.classname.divButtons}>
-                <button
-                    className={
-                        datacard.card.classname.button.replace('rm-btn rm-orange','btn btn-outline-danger p-0')
-                    }
-                    onClick={(e) => {
-                        addFavourite(e);
-                        props.setFavourites([...props.favourites, e.target.attributes.dataProdcutid.value]);
-                    }}
-                    dataid={`.card${product.id} .fa-heart`}
-                    dataProdcutid={product.id}
+                <div
+                    className={ datacard.card.classname.diviconfavourite}
+                    style={datacard.card.stylediviconfavourite}
                 >
-                    <i className="far fa-heart m-1"
-                        dataid={`.card${product.id} .fa-heart`}
-                        id={`.card${product.id} .fa-heart`}
-                        dataProdcutid={product.id}
+                    <i className="far fa-heart ml-auto text-danger pointer"
+                        id={product.id}
+                        dataid={product.id}
+                        onClick={(e) => {
+                            addFavourite(e);
+                            e.target.classList.value.includes('text-danger')
+                                ? e.target.classList.value.replace('text','bg')
+                                : e.target.classList.value.replace('bg','text');
+                        }}
                     >
                     </i>
-                </button>
+                </div>
                 <button
                     dataid={datacard.cardID ? datacard.cardID : ''}
                     className={datacard.card.classname.button}

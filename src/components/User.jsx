@@ -52,7 +52,6 @@ export default function User(props) {
                         user={props.user}
                         setUser={props.setUser}
                         admin={props.admin}
-                        favourites={props.favourites}
                         products={props.products}
                     />
                 </Route>

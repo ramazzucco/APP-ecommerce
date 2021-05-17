@@ -63,8 +63,6 @@ export default function Index(props) {
                     setItems={props.setItems}
                     path={props.path}
                     setPath={props.setPath}
-                    favourites={props.favourites}
-                    setFavourites={props.setFavourites}
                 />
             </Route>
             {   // Categorias.

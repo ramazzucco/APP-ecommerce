@@ -19,18 +19,26 @@ export default function Detail(props) {
     const [ dataquantity, setDataquantity ] = useState({user: props.user ? props.user.user : '', id: props.product.id})
     const [ quantitywidth, setQuantitywidth ] = useState(100)
 
-    const views = props.views ? props.views : '';
-
     const amountofunit = Array.from({length: props.product.stock}, () => {return 'something'} );
 
     useEffect(() => {
         window.scrollTo(0,75)
+        countViewOfProduct();
     },[])
 
     useEffect(() => {
         const getquantitywidth = document.querySelector('.info .quantity');
         if(getquantitywidth) setQuantitywidth(getquantitywidth.clientWidth);
     },[props.width])
+
+    const countViewOfProduct = async () => {
+        const views = props.views ? props.views.numero + 1 : 1;
+
+        const request = await fetch(urlbase + `/api/product/views?id=${props.product.id}&view=${views}`);
+        const response = await request.json();
+
+        console.log(response)
+    }
 
     const writeMessage = (e) => {
         const writemessage = document.querySelector('.writemessage');
@@ -162,13 +170,6 @@ export default function Detail(props) {
         title: {
             classname: "col-12 h5 text-capitalize text-left bg-main-contrast-4 my-5 p-0",
             content: "Productos relacionados"
-        },
-        card: {
-            classname: generaldataproductcard.card.classname,
-            style: {
-                minHeight: '360px',
-                maxHeight: '360px'
-            }
         }
     };
 
@@ -218,8 +219,14 @@ export default function Detail(props) {
                                 {props.product.name}
                             </p>
                             <p className="vistas col-2 p-0 bg-main-contrast-4">
-                                <i className='fas fa-eye'></i>
-                                {views.numero}
+                                {
+                                    props.views && props.views.numero > 0
+                                        ? <React.Fragment>
+                                            <i className='fas fa-eye'></i>
+                                            {props.views.numero + 1}
+                                        </React.Fragment>
+                                        : ''
+                                }
                             </p>
                             <i className="far fa-heart col-1 px-0 pt-1 text-right text-danger"
                                 dataid={`.card${props.product.id} .fa-heart`}

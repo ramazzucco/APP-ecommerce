@@ -16,6 +16,7 @@ export default function Slidercard(props) {
                 </h2>
                     <CarouselProvider
                         className={datacard.carouselprovider.classname}
+                        style={datacard.carouselprovider.style ? datacard.carouselprovider.style : {}}
                         hasMasterSpinner={datacard.carouselprovider.hasmasterspinner}
                         totalSlides={datacard.carouselprovider.totalslides}
                         visibleSlides={datacard.carouselprovider.visibleslides}
@@ -32,8 +33,6 @@ export default function Slidercard(props) {
                                                     product={product}
                                                     items={props.items}
                                                     setItems={props.setItems}
-                                                    favourites={props.favourites}
-                                                    setFavourites={props.setFavourites}
                                                 />
                                         </Slide>
                                         )

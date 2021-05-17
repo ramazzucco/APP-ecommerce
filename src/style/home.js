@@ -52,31 +52,39 @@ const datainfocards = [
 const generaldataproductcard = {
     carouselprovider: {
         classname: "overflow-hidden mb-5",
+        style: {
+            minHeight: '490px'
+        },
         hasmasterspinner: true,
     },
     slide: {
-        classname: "list-unstyled"
+        classname: "list-unstyled mt-3"
     },
     card:{
         classname:{
-            card: `col-11 py-3 d-flex justify-content-between card`,
-            image: `image d-flex justify-content-center mb-2`,
-            imagewidth: "70%",
-            info: `info d-flex flex-wrap justify-content-center align-items-center mt-3`,
-            infoName: `w-100 text-center mb-2`,
-            infoPrice: "h5 mb-0 pl-3",
+            card: `col-11 py-3 d-flex justify-content-between align-items-center card position-relative`,
+            image: `image d-flex justify-content-center`,
+            imagewidth: "90%",
+            info: `info d-flex flex-wrap justify-content-center align-items-center`,
+            infoName: `name w-100 text-center text-truncate`,
+            infoPrice: "h5 mb-0",
             infoDiscount: "mb-0 ml-3",
-            divButtons: "buy text-center p-2",
-            linkbutton: 'd-flex flex-column justify-content-center', // Es para el link que contiene a la imagen y la informacion del producto.
+            divButtons: "buy w-100 text-center p-2",
+            linkbutton: 'd-flex flex-column justify-content-start pt-3', // Es para el link que contiene a la imagen y la informacion del producto.
+            diviconfavourite: 'w-100 d-flex p-2',
             button: "w-100 rm-btn rm-orange mt-1 outline",
         },
         stylelink:{
-            minHeight: `${(400 * 70) / 100}px`,
-            maxHeight: `${(400 * 70) / 100}px`
+            minWidth: '150px',
+            maxWidth: '150px',
         },
         style: {
             minHeight: '400px',
-            maxHeight: '400px'
+        },
+        stylediviconfavourite: {
+            position: 'absolute',
+            top: '0',
+            left: '0'
         }
     },
     buttons: {

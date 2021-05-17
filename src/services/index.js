@@ -166,6 +166,24 @@ const addFavourite = (e) => {
     }
 }
 
+const getFavourite = () => {
+
+    const favourite = JSON.parse(localStorage.getItem('favourite'));
+
+    if(favourite){
+        favourite.ids.map( fId => {
+            const cards = document.querySelectorAll(`.card${fId} .fa-heart`);
+
+            if(cards){
+               cards.forEach( card => {
+                   card.classList.replace('far','fas');
+               })
+            }
+            return 'done';
+        })
+    }
+}
+
 const saveUserPreference = () => {
     window.onbeforeunload = async () => {
         const datacart = JSON.parse(localStorage.getItem('userdatacart'));
@@ -242,6 +260,7 @@ export {
     hidesubmenues,
     responsiveHideSubmenues,
     addFavourite,
+    getFavourite,
     addToCart,
     toggleIcon,
     saveUserPreference,

@@ -46,7 +46,11 @@ export default function Contact(props) {
             if(!response.error){
                 modal('successful','Enhorabuena !','El mail ha sido enviado con exito.');
 
-                const inputs = document.querySelector('form#contact input')
+                const inputs = document.querySelectorAll('form#contact input')
+
+                inputs.forEach( input => {
+                    input.value = '';
+                })
             } else {
                 modal('failed','Lo sentimos !', response.data.message)
             }
