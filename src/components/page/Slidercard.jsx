@@ -26,7 +26,7 @@ export default function Slidercard(props) {
                                 datacard.products
                                     ? datacard.products.map( (product, i) => {
                                         return (
-                                            <Slide index={i} className={datacard.slide.classname}>
+                                            <Slide index={i} key={i} className={datacard.slide.classname}>
                                                 <Card
                                                     user={props.user}
                                                     datacard={datacard}

@@ -52,8 +52,8 @@ export default function Style(props, showlogin, showsignup, handlerButtonMenu, l
     const classLink = `${textcolor.link} outline py-2 py-md-0`;
 
     // const classUsersButton = `dropdown col-12 col-md-4 p-0 d-flex justify-content-center justify-content-md-end my-3 my-md-0`;
-    const classButtonLogin = `col-5 rm-btn-outline rm-orange text-uppercase`;
-    const classButtonSignup = `col-5 rm-btn rm-orange text-uppercase ml-3`;
+    const classButtonLogin = `col-4 col-sm-2 col-md-5 rm-btn-outline rm-orange text-uppercase`;
+    const classButtonSignup = `col-4 col-sm-2 col-md-5 rm-btn rm-orange text-uppercase ml-3`;
 
     const classSubmenuHeader = `submenu headerlinks ${backgroundcolor.submenuheader} text-center d-none text-capitalize shadow`;
     const classSubmenuHeaderLink = `${textcolor.submenuheader} my-2`;
@@ -99,11 +99,11 @@ export default function Style(props, showlogin, showsignup, handlerButtonMenu, l
                 {
                     submenu: true,
                     title: "Categories",
-                    link: "/page/allcategories",
+                    link: "/page/todaslascategorias",
                     icon: <i className="fa fa-chevron-up d-none float-right d-md-flex ml-1 mt-2" style={{fontSize:'0.8rem'}}></i>,
                     onClick: () => {
                         handlersubmenu("headerlinks", props.width);
-                        toggleIcon('#Categories i','up','fa-chevron-up','fa-chevron-down')
+                        toggleIcon('#Categories i','up','fa-chevron-up','fa-chevron-down');
                     },
                 },
                 {

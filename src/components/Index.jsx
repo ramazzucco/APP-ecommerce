@@ -17,6 +17,7 @@ import Faq from './page/Faq';
 import User from "./User";
 import Modalinfo from './Modalinfo';
 import Loadinginfo from './Loadinginfo';
+import Allcategories from './page/Allcategories';
 
 export default function Index(props) {
 
@@ -67,9 +68,9 @@ export default function Index(props) {
             </Route>
             {   // Categorias.
                 props.products.categories
-                    ? props.products.categories.map( category => {
+                    ? props.products.categories.map( (category, i) => {
                         return (
-                            <Route path={`/page/${category.name}`}>
+                            <Route path={`/page/${category.name}`} key={i}>
                                 <Categories
                                     user={props.user}
                                     products={
@@ -88,9 +89,9 @@ export default function Index(props) {
             }
             {   // Detalle.
                 props.products.allproducts
-                    ? props.products.allproducts.map( product => {
+                    ? props.products.allproducts.map( (product, i) => {
                         return (
-                            <Route path={`/page/${product.category_id}/${product.id}`}>
+                            <Route path={`/page/${product.category_id}/${product.id}`} key={i}>
                                 <Detail
                                     product={product}
                                     products={props.products}
@@ -114,6 +115,12 @@ export default function Index(props) {
                     })
                     : ''
             }
+            <Route path='/page/todaslascategorias'>
+                <Allcategories
+                    width={props.width}
+                    categories={props.products.categories}
+                />
+            </Route>
             <Route path='/page/cart'>
                 {
                     props.user

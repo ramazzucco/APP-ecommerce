@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
-import { datainfocards as datainfo, generaldataproductcard } from "../../style/home";
+import { datainfocards as datainfo, generaldataproductcard } from "../../datacomponents/home";
 import { urlbase } from "../../services/getInfoPage";
 import { closeSubMenues } from "../../services";
 
@@ -72,7 +72,6 @@ export default function Home(props) {
                                 return (
                                     <Slide index={i} key={i} className="list-unstyled">
                                         <img
-                                            key={i}
                                             src={urlbase + `/images/${promo.image}`}
                                             width={`${props.width}px`}
                                             height={`${props.width < 768 ? '250px' : '500px'}`}

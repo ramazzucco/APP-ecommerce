@@ -97,9 +97,12 @@ export default function About(props) {
                 </h1>
                 <div className="employe d-flex flex-wrap justify-content-around mt-5">
                     {
-                        ourteam.map( employe => {
+                        ourteam.map( (employe, i) => {
                             return (
-                                <div className='col-8 col-sm-5 col-lg-3 p-3 pt-5 mb-3 d-flex flex-column align-items-center justify-content-around bg-main-sombra-3 rounded-lg shadow-lg'>
+                                <div
+                                    key={i}
+                                    className='col-8 col-sm-5 col-lg-3 p-3 pt-5 mb-3 d-flex flex-column align-items-center justify-content-around bg-main-sombra-3 rounded-lg shadow-lg'
+                                >
                                     <div className="dataemplye w-100 bg-main-sombra-2 border rounded-pill text-center pt-4 pb-3 px-4 position-relative">
                                         <img
                                             className='position-absolute'
@@ -119,9 +122,9 @@ export default function About(props) {
                                     </cite>
                                     <div className="socialnetworks">
                                         {
-                                            employe.socialnetworks.map( sn => {
+                                            employe.socialnetworks.map( (sn, i) => {
                                                 return (
-                                                    <Link to={sn.url}>
+                                                    <Link to={sn.url} key={i}>
                                                         <i className={`fab fa-${sn.name} fa-2x`}></i>
                                                     </Link>
                                                 )

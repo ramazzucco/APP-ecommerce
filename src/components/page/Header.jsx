@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { urlbase } from "../../services/getInfoPage";
-import Styleheader from "../../style/header";
+import Styleheader from "../../datacomponents/header";
 
 // Components.
 import Header1 from "./Header1";

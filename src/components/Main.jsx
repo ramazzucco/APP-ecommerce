@@ -16,7 +16,6 @@ export default function Main(props) {
     const [ width, setWidth ] = useState(0)
     const [ products, setProducts ] = useState([])
     const [ path, setPath ] = useState(window.location.pathname)
-    // const [ favourites, setFavourites ] = useState([])
 
     const getProducts = async () => {
         const request = await fetch(urlbase + "/api/product/");
@@ -67,6 +66,12 @@ export default function Main(props) {
             }
         }
 
+        // Cuando crean una cuenta despues de haber querido comprar un producto sin ser usuario.
+        const userwantedbuyproduct = localStorage.getItem('userwantedbuyproduct');
+
+        if(userwantedbuyproduct){
+            window.location.pathname = userwantedbuyproduct;
+        }
     }
 
     const getCartItems = useCallback(() => {

@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import { environment } from "./services/getInfoPage";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './index.css';
 
-environment("development");
+environment(process.env.NODE_ENV);
 
 ReactDOM.render(
   <React.StrictMode>

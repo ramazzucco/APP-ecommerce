@@ -392,11 +392,11 @@ label[for=password] {
     z-index: 5;
 }
 @media(max-width: 990px){
-    .rm-btn {
+    .usersheader .rm-btn {
         font-size: 0.6rem;
         padding: 5px 10px;
     }
-    .rm-btn-outline {
+    .usersheader .rm-btn-outline {
         font-size: 0.6rem;
         padding: 5px 10px;
     }

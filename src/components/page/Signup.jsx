@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Style from "../../style/signup";
+import Style from "../../datacomponents/signup";
 import { cancel, submit } from "../../services/handlerForm";
 
 //Components.

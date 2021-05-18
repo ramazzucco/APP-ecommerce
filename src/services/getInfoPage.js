@@ -9,6 +9,4 @@ const environment = (environment) => {
         : urlbase.push(urlbaseproduction)
 }
 
-const themes = [ "styledefault", "light1", "dark1" ];
-
-export { environment, urlbase, themes }
+export { environment, urlbase }

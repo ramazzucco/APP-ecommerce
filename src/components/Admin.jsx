@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { themes as Themes} from '../services/getInfoPage';
 
 export default function Admin(props) {
     // const [ themes, setThemes ] = useState([]);
@@ -19,9 +18,7 @@ export default function Admin(props) {
     const getSelectedTheme = () => {
         const selectTheme = document.querySelector(".theme#theme");
 
-        Themes.forEach( (theme, i) => {
-            if(theme === props.theme.name) selectTheme.options.selectedIndex = i
-        })
+        
     }
 
     return (
@@ -29,13 +26,7 @@ export default function Admin(props) {
             <h1>ADMIN</h1>
             <div className="col-12 p-0 m-0 d-flex justify-content-center align-self-center">
                 <select name="theme" id="theme" onChange={handlerChange} className="theme form-control text-center col-3 p-0">
-                    {
-                        Themes.map( (theme, i) => {
-                            return (
-                                <option value={theme} key={i}>{theme}</option>
-                            )
-                        })
-                    }
+                   
                 </select>
             </div>
         </div>

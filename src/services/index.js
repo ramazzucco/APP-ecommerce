@@ -1,13 +1,13 @@
 import { urlbase } from "./getInfoPage";
 
-const root = document.getElementById("root");
-let width;
+// const root = document.getElementById("root");
+// let width;
 
-width = root.clientWidth;
+// width = root.clientWidth;
 
-window.onresize = () => {
-    width = window.innerWidth;
-}
+// window.onresize = () => {
+//     width = window.innerWidth;
+// }
 
 const qS = (selector) => {
     return document.querySelector(selector);
@@ -44,7 +44,6 @@ const hidesubmenues = (e) => {
 
 const handlersubmenu = (selector, responsive) => {
     const submenues = document.querySelectorAll(".submenu");
-    // const section = document.querySelector("section");
 
     if(responsive){  // Si el ancho es menor a 768px cuando clickea evita que se abra el sub menu.
         if(responsive > 768){
@@ -252,7 +251,7 @@ const modal = (action, title, content) => {
 }
 
 export {
-    width,
+    // width,
     getRememberTheme,
     getSession,
     handlersubmenu,

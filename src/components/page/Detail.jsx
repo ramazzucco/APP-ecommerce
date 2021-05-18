@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { urlbase } from '../../services/getInfoPage'
 import { addFavourite, addToCart, closeSubMenues } from '../../services'
-import { generaldataproductcard } from "../../style/home";
+import { generaldataproductcard } from "../../datacomponents/home";
 
 // Components.
 import Slidercard from "./Slidercard";
@@ -16,7 +16,11 @@ export default function Detail(props) {
         to_name:'ADMIN',
         product_link: props.user ? `/page/${props.product.category_id}/${props.product.id}` : ''
     })
-    const [ dataquantity, setDataquantity ] = useState({user: props.user ? props.user.user : '', id: props.product.id})
+    const [ dataquantity, setDataquantity ] = useState({
+        user: props.user ? props.user.user : '',
+        id: props.product.id,
+        quantity: ['0']
+    })
     const [ quantitywidth, setQuantitywidth ] = useState(100)
 
     const amountofunit = Array.from({length: props.product.stock}, () => {return 'something'} );
@@ -96,6 +100,8 @@ export default function Detail(props) {
 
         setDataquantity({...dataquantity, token: token, quantity: [e.target.value]});
 
+        toggleSubmenuQuantity(e);
+        toggleIcon();
     }
 
     const submitQuantity = async () => {
@@ -104,7 +110,7 @@ export default function Detail(props) {
         error.classList.add('error','text-danger', 'text-center','w-100');
         error.innerHTML = 'Debe elegir la cantidad.';
 
-        if(!dataquantity.quantity){
+        if(dataquantity.quantity[0] === '0'){
             const quantity = document.querySelector('.card-detail .quantity');
 
             if(!quantity.childNodes[2]){
@@ -112,17 +118,27 @@ export default function Detail(props) {
             }
 
         } else {
-            const options = {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(dataquantity),
-            };
 
-            const request = await fetch(urlbase + '/api/product/generatepreference', options);
-            const response = await request.json();
+            if(!props.user){
+                window.scrollTo(0,0);
 
-            console.log(response)
-            window.location.href = response.data.redirect;
+                document.querySelector("body").classList.toggle("overflow-hidden");
+                document.querySelector(".signup").classList.replace("d-none","d-flex");
+
+                localStorage.setItem('userwantedbuyproduct',`${window.location.pathname}`);
+            } else {
+                const options = {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(dataquantity),
+                };
+
+                const request = await fetch(urlbase + '/api/product/generatepreference', options);
+                const response = await request.json();
+
+                console.log(response)
+                window.location.href = response.data.redirect;
+            }
         }
 
     }
@@ -153,10 +169,15 @@ export default function Detail(props) {
         const input = document.getElementById(e.target.attributes.datamorequantity.value);
 
         input.classList.toggle('d-none');
+    }
 
-        setDataquantity({});
+    const hidesubmenuselects = (e) => {
+        const submenu_select = document.getElementById('quantity');
 
-        if(input.value !== '') input.value = '';
+        if(!submenu_select.className.includes('d-none') && !['BUTTON','I'].includes(e.target.tagName)){
+            submenu_select.classList.toggle('d-none');
+            toggleIcon();
+        }
     }
 
     const datacardrelatedproducts = {
@@ -179,7 +200,7 @@ export default function Detail(props) {
     return (
         <section
             className="container-fluid detail bg-color-main py-5"
-            onClick={closeSubMenues}
+            onClick={(e) => { closeSubMenues(); hidesubmenuselects(e); }}
         >
             <div className="marca mb-4 col-11 col-md-10 mx-auto">
                 <p className='display-2 text-capitalize position-absolute bg-main-contrast-3'
@@ -292,7 +313,7 @@ export default function Detail(props) {
                                 : ''
                         }
 
-                        <div className={`quantity ${
+                        <div className={`quantity submenu-select ${
                                 props.width < 768 ? 'w-100' : props.width < 1040 ? 'w-75' : 'w-50'
                             } d-flex flex-column overflow-hidden`}
                         >
@@ -323,7 +344,7 @@ export default function Detail(props) {
                                                     key={i}
                                                     value={i+1}
                                                     className={
-                                                        `mb-0 py-2 ${`${i+1}` === dataquantity.quantity ? 'border rounded bg-white' : ''}`
+                                                        `mb-0 py-2 ${`${i+1}` === dataquantity.quantity[0] ? ' border rounded bg-white' : ''}`
                                                     }
                                                     dataid='quantity'
                                                     onMouseOver={(e) => e.target.classList.value = 'mb-0 py-2 border rounded bg-white pointer'}
@@ -331,9 +352,9 @@ export default function Detail(props) {
                                                         if(!e.target.attributes.selected) e.target.classList.value = 'mb-0 py-2'
                                                     }}
                                                     onClick={handlerQuantity}
-                                                    selected={`${i+1}` === dataquantity.quantity ? true : false}
+                                                    selected={`${i+1}` === dataquantity.quantity[0] ? true : false}
                                                 >
-                                                    {i + 1} {i + 1 === 0 ? 'Unidad' : 'Unidades'}
+                                                    {i + 1} {i === 0 ? 'Unidad' : 'Unidades'}
                                                 </option>
                                                 : ''
                                             )
@@ -347,13 +368,14 @@ export default function Detail(props) {
                                         onClick={toggleMorethanfiveQuantity}
                                         datamorequantity='morethanfive'
                                         dataid='quantity'
+                                        selected={Number(dataquantity.quantity[0]) > 5 ? true : false}
                                     >
                                         Mas de 5 unidades
                                     </option>
                                     <input
                                         id='morethanfive'
                                         dataid='quantity'
-                                        className='d-none border-top border-left border-right rounded text-center'
+                                        className='d-none w-100 py-1 border-top border-left border-right rounded-bottom text-center'
                                         type="number"
                                         name="quantity"
                                         onChange={handlerQuantity}

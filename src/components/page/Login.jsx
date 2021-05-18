@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { urlbase } from "../../services/getInfoPage";
-import Style from "../../style/login";
+import Style from "../../datacomponents/login";
 import { cancel, submit } from "../../services/handlerForm";
 
 //Components.

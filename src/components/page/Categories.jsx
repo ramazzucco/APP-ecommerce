@@ -1,6 +1,6 @@
 import React,{ useState, useEffect, useCallback } from "react";
 import { closeSubMenues } from '../../services'
-import { getOptionsOrderBy } from '../../style/categories';
+import { getOptionsOrderBy } from '../../datacomponents/categories';
 
 //Components.
 import Card from "./Card";
@@ -179,7 +179,7 @@ export default function Categories(props) {
         <section className={`container-fluid d-flex flex-column flex-md-row flex-wrap ${category} bg-color-main py-4`}
             onClick={closeSubMenues}
         >
-            <h2 className="col-12 text-left bg-main-contrast-3 text-capitalize my-4 pl-4 mb-5 border-bottom">
+            <h2 className="col-12 text-left bg-main-contrast-3 text-capitalize my-4 pl-4 pb-2 mb-5 border-bottom">
                 {category}
             </h2>
             <div className="orderby col-11 pl-4 pr-0 col-md-3 mx-auto" onClick={showOrderBy}>

@@ -95,9 +95,9 @@ export default function Faq(props) {
         >
             <div className="faq col-12 col-md-10 col-lg-8 p-0 mx-auto my-5 shadow-lg">
                 {
-                    faqs.map( faq => {
+                    faqs.map( (faq, i) => {
                         return (
-                            <div className={faq.className.faq}>
+                            <div className={faq.className.faq} key={i}>
                                 <div
                                     className={faq.className.header}
                                     onClick={faq.onclick}
