@@ -12,6 +12,7 @@
 
 .mytooltip {
     display: none;
+    position: relative;
     min-width: 100%;
     transition: all 1s ease;
 }
@@ -21,7 +22,7 @@
     border-radius: 3px;
     background-color: var(--naranja);
     padding: 10px;
-    top: -55px;
+    top: -66px;
     color: white;
     min-width: 300px;
     text-transform: lowercase;
@@ -31,8 +32,8 @@
 .mytooltip::after {
     content: '';
     position: absolute;
-    top: -20px;
-    left: 47%;
+    top: -33px;
+    left: 50%;
     width: 15px;
     height: 16px;
     background-color: var(--naranja);
@@ -88,5 +89,9 @@
     .spinner-grow {
         width: 20px;
         height: 20px;
+    }
+    .mytooltip::after {
+        top: -36px;
+        left: 43%;
     }
 }

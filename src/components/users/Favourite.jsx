@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { urlbase } from "../../services/getInfoPage";
 
@@ -7,11 +7,7 @@ export default function Favourite(props) {
 
     const [ favouriteprod, setFavouriteprod ] = useState([])
 
-    useEffect(() => {
-        getFavourites();
-    },[])
-
-    const getFavourites = () => {
+    const getFavourites = useCallback(() => {
         const favourites = JSON.parse(localStorage.getItem('favourite'));
         const favouriteproducts = [];
 
@@ -24,7 +20,11 @@ export default function Favourite(props) {
 
             setFavouriteprod(favouriteproducts);
         }
-    }
+    },[props.products])
+
+    useEffect(() => {
+        getFavourites();
+    },[getFavourites])
 
     const deleteFavourite = (e) => {
         const favourites = JSON.parse(localStorage.getItem('favourite'));

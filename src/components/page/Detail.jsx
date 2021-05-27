@@ -22,13 +22,21 @@ export default function Detail(props) {
         quantity: ['0']
     })
     const [ quantitywidth, setQuantitywidth ] = useState(100)
+    const [ views, setViews ] = useState({})
 
     const amountofunit = Array.from({length: props.product.stock}, () => {return 'something'} );
 
     useEffect(() => {
         window.scrollTo(0,75)
+
+        if(props.views) setViews(props.views);
+
         countViewOfProduct();
     },[])
+
+    useEffect(() => {
+        setViews(props.views);
+    },[props.views])
 
     useEffect(() => {
         const getquantitywidth = document.querySelector('.info .quantity');
@@ -36,11 +44,24 @@ export default function Detail(props) {
     },[props.width])
 
     const countViewOfProduct = async () => {
-        const views = props.views ? props.views.numero + 1 : 1;
+        let newviews;
 
-        const request = await fetch(urlbase + `/api/product/views?id=${props.product.id}&view=${views}`);
+        if(props.views){
+            newviews = {
+                products_id: props.product.id,
+                numero: props.views.numero + 1
+            }
+        } else {
+            newviews = {
+                products_id: props.product.id,
+                numero: 1
+            }
+        }
+
+        const request = await fetch(urlbase + `/api/product/views?id=${newviews.products_id}&view=${newviews.numero}`);
         const response = await request.json();
 
+        props.setProducts({...props.products, views: response.data})
         console.log(response)
     }
 
@@ -241,10 +262,10 @@ export default function Detail(props) {
                             </p>
                             <p className="vistas col-2 p-0 bg-main-contrast-4">
                                 {
-                                    props.views && props.views.numero > 0
+                                    views && views.numero > 0
                                         ? <React.Fragment>
                                             <i className='fas fa-eye'></i>
-                                            {props.views.numero + 1}
+                                            {views.numero}
                                         </React.Fragment>
                                         : ''
                                 }

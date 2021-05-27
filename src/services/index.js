@@ -212,7 +212,6 @@ const saveUserPreference = () => {
 }
 
 const modal = (action, title, content) => {
-
     const data = {
         className: {
             div: 'col-10 col-md-8 col-lg-6 bg-main-sombra-2 mx-auto p-5 shadow position-absolute rounded',

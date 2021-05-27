@@ -11,13 +11,13 @@ import Loadingdata from "../Loadingdata";
 export default function Categories(props) {
 
     const [ products, setProducts ] = useState(props.products)
-    const [ productperpage, setProductperpage ] = useState(2)
+    const [ productperpage ] = useState(2)
     const [ page, setPage ] = useState(1)
     const [ previouspage, setPreviouspage ] = useState(0)
     const [ nextpage, setNextpage ] = useState(page + 1)
     const [ pagination, setPagination ] = useState(Math.ceil(products.length / productperpage))
     const [ orderby, setOrderby ] = useState('')
-    const [ category, setCategory ] = useState(props.products[0].category_title)
+    const [ category ] = useState(props.products[0].category_title)
     const [ error, setError ] = useState('')
 
     const datacard = {

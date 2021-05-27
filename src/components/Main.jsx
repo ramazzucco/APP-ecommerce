@@ -69,7 +69,7 @@ export default function Main(props) {
         // Cuando crean una cuenta despues de haber querido comprar un producto sin ser usuario.
         const userwantedbuyproduct = localStorage.getItem('userwantedbuyproduct');
 
-        if(userwantedbuyproduct){
+        if(userwantedbuyproduct && window.location.pathname !== userwantedbuyproduct){
             window.location.pathname = userwantedbuyproduct;
         }
     }
@@ -189,7 +189,14 @@ export default function Main(props) {
             <Route path="/admin">
                 {
                     user && user.user.status === 2
-                        ? <Admin user={user} />
+                        ? <Admin
+                            user={user}
+                            setUser={setUser}
+                            setAdmin={setAdmin}
+                            messages={products.messages}
+                            products={products}
+                            width={width}
+                        />
                         : <Redirect to='/page' />
                 }
             </Route>

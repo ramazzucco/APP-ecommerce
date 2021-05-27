@@ -10,7 +10,6 @@ import Links from "./Links";
 export default function Header1(props) {
 
     const [ datasearch, setDatasearch ] = useState('')
-    const [ moveOptions, setMoveOptions ] = useState(0)
     const [ divwidthofusername, setDivwidthofusername ] = useState(0)
 
     const header = props.styleheader;
@@ -21,78 +20,69 @@ export default function Header1(props) {
         }
     },[props])
 
-    const submitSearch = (data) => {
-        props.products.forEach( product => {
-            if(product.name.toLowerCase().includes(data.toLowerCase()) || product.name === data){
-                window.location.pathname = `/page/${product.category_id}/${product.id}`
-            }
-
-        });
+    window.onclick = (e) => {
+        if(!e.target.classList.value.includes('option-search')){
+            setDatasearch('');
+        }
     }
 
-    const handlerOnKeyDownSearch = (e) => {
+    let move = 0;
 
-        setMoveOptions(0);
+    const handlerOnKeyDownSearch = (e) => {
+        const optionslist = document.querySelectorAll('#listsearch p');
+
+        if(e.keyCode === 40 && move < optionslist.length){
+            move++
+        }
+
+        if(e.keyCode === 38 && move > 0) {
+            move--
+        }
 
         if(e.keyCode === 13){
-            if(datasearch !== ''){
-                const options = document.querySelectorAll('#listsearch p');
-                let selectwhitharrowkey;
+            optionslist.forEach( async (option, i) => {
+                if(i === move){
+                    option.parentElement.click()
+                }
 
-                options.forEach( option => {
+                setDatasearch('');
+            })
+        }
 
-                    if(option.className.includes('bg-main-sombra-2')){
-                        submitSearch(option.innerHTML);
-                        selectwhitharrowkey = true;
-                    }
-
-                })
-
-                if(!selectwhitharrowkey) submitSearch(datasearch);
+        optionslist.forEach( (option, i) => {
+            if(i === move){
+                option.classList.add('bg-main-sombra-2');
+            } else {
+                option.classList.remove('bg-main-sombra-2');
             }
+        })
+    }
+
+    const searchProduct = () => {
+        const response = [];
+        props.products.map( (product, i) => {
+            if(product.name.toLowerCase().includes(datasearch.toLowerCase()) && datasearch !== ''){
+
+                response.push(
+                    <Link to={`/page/${product.category_id}/${product.id}`} key={i}>
+                        <p className='option-search-admin pl-3 py-1 pointer mb-0 text-lowercase'>
+                            {product.name}
+                        </p>
+                    </Link>
+                )
+            }
+            return '';
+        });
+
+        if(!response.length){
+            response.push(
+                <p className='option-search-admin pl-3 py-1 pointer mb-0 text-lowercase'>
+                    No se ha encontrado nada con "{datasearch}"
+                </p>
+            )
         }
 
-        if(e.keyCode === 40){
-            const options = document.querySelectorAll('#listsearch p');
-            let moveoptionposition;
-
-            moveOptions === 0
-                ? moveoptionposition = 1
-                : moveoptionposition = moveOptions;
-
-            if(moveoptionposition < options.length) setMoveOptions(moveOptions + 1);
-
-            options.forEach( (option, i) => {
-                if(i+1 === moveoptionposition){
-                    option.classList.add('bg-main-sombra-2');
-                } else {
-                    if(option.className.includes('bg-main-sombra-2')){
-                        option.classList.remove('bg-main-sombra-2');
-                    }
-                }
-            })
-        }
-
-        if(e.keyCode === 38){
-            const options = document.querySelectorAll('#listsearch p');
-            let moveoptionposition;
-
-            moveOptions === options.length
-                ? moveoptionposition = options.length
-                : moveoptionposition = moveOptions;
-
-            if(moveoptionposition > 0) setMoveOptions(moveOptions - 1);
-
-            options.forEach( (option, i) => {
-                if(i+1 === moveoptionposition){
-                    option.classList.add('bg-main-sombra-2');
-                } else {
-                    if(option.className.includes('bg-main-sombra-2')){
-                        option.classList.remove('bg-main-sombra-2');
-                    }
-                }
-            })
-        }
+        return response;
     }
 
     return (
@@ -125,28 +115,12 @@ export default function Header1(props) {
                     >
                         {
                             props.products
-                                ? props.products.map( (product, i) => {
-                                    if(product.name.toLowerCase().includes(datasearch.toLowerCase()) && datasearch !== ''){
-
-                                        const pathname = `/page/${product.category_id}/${product.id}`;
-
-                                        return (
-                                            <p
-                                                key={i}
-                                                className='text-naranja rounded-lg pl-3 py-1 pointer mb-0'
-                                                onClick={() => window.location.pathname = pathname}
-                                            >
-                                                {product.name}
-                                            </p>
-                                        )
-                                    }
-                                    return 'done'
-                                })
-                                : ''
+                                ? searchProduct()
+                                : () => {}
                         }
                     </div>
                     <label htmlFor="search" className={header.search.label}>
-                        <i className="fas fa-search" onClick={() => submitSearch(datasearch)}></i>
+                        <i className="fas fa-search" onClick={() => searchProduct()}></i>
                     </label>
                 </div>
                 <Links
@@ -182,15 +156,16 @@ export default function Header1(props) {
                             </div>
                             <Link to={props.avatar.link} className={header.usersbuttons.avatar.img}>
                                 <div
-                                    className='image rounded-circle'
-                                    style={{maxWidth: '27px',maxHeight: '27px',overflow: 'hidden'}}
+                                    className='image rounded-circle overflow-hidden d-flex justify-content-center align-items-center'
+                                    style={{maxWidth: '27px',maxHeight: '27px'}}
                                 >
                                     <img
                                         src={ urlbase[0] + `/images/avatars/${props.user ? props.user.avatar : ""}`}
                                         alt="foto de usuario"
-                                        width="100%"
+                                        width="33px"
+                                        height='33px'
                                         submenu="true"
-                                        style={{objectFit: 'contain'}}
+                                        style={{objectFit: 'contain',borderRadius: '50%'}}
                                         onClick={ () => handlersubmenu("avatar", props.width) }
                                     />
                                 </div>
@@ -281,7 +256,7 @@ export default function Header1(props) {
                 className={header.submenubell.div}
                 onMouseLeave={(e)=> { hidesubmenues(e) }}
             >
-                <p className='m-0'>
+                <p className='m-0 text-sombra-main-4'>
                     No hay notificaciones!
                 </p>
             </div>

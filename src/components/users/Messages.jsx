@@ -12,7 +12,8 @@ export default function Messages(props) {
         from_name: `${props.user.user.first_name} ${props.user.user.last_name}`,
         to_id: props.admin ? props.admin.id : 0,
         to_name: 'ADMIN',
-        users_id: props.user.user.id
+        users_id: props.user.user.id,
+        avatar: props.user.user.avatar
     })
     const [ datapost, setDatapost ] = useState(defaultdatapost)
 
@@ -22,6 +23,8 @@ export default function Messages(props) {
 
     const handlerSubmit = (e) => {
         e.preventDefault();
+
+        console.log(e.target)
 
         console.log(datapost)
         const token = localStorage.getItem('token');
@@ -38,9 +41,10 @@ export default function Messages(props) {
         const submitmessage = submit(url, options, props.setUser, 'message', props.user);
 
         if(submitmessage && submitmessage.successful){
-            document.querySelector('.write-message #content').value = '';
+            document.querySelector('#form-message #content').value = '';
             setDatapost(defaultdatapost);
         }
+        console.log(props.incommingmessages)
     }
 
     const datatextarea = {
@@ -81,7 +85,7 @@ export default function Messages(props) {
                                     >
                                         <div
                                             className={`avatar d-flex mb-2
-                                                ${msg.from_name === 'ADMIN' ? 'flex-row-reverse' : ''}
+                                                ${msg.from_name === 'ADMIN' ? 'flex-row-reverse ml-3' : 'mr-3'}
                                                 align-items-center justify-content-end`
                                             }
                                         >
@@ -92,8 +96,8 @@ export default function Messages(props) {
                                                 </span>
                                             </p>
                                             <div
-                                                className='image rounded-circle'
-                                                style={{maxWidth: '33px',maxHeight: '33px',overflow: 'hidden'}}
+                                                className='image rounded-circle overflow-hidden d-flex justify-content-center align-items-center'
+                                                style={{ width: "33px", height: "33px" }}
                                             >
                                                 <img
                                                     src={
@@ -102,10 +106,12 @@ export default function Messages(props) {
                                                             : `${urlbase}/images/avatars/${props.user.user.avatar}`
                                                     }
                                                     alt="avatar"
-                                                    width='100%'
-                                                    height='33px'
-                                                    style={{right: `${msg.from_name !== 'ADMIN' ? '20px' : ''}`,objectFit: 'contain'}}
-                                                    className='shadow-sm'
+                                                    width="44px"
+                                                    height="44px"
+                                                    style={{
+                                                        objectFit: "contain",
+                                                        borderRadius: "50%",
+                                                    }}
                                                 />
                                             </div>
                                         </div>

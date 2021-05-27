@@ -75,15 +75,19 @@ const submit = async (url, options, setData, formName, data) => {
             submitresponse = { successful: false, error: response.data.message }
         } else {
             response.data.forEach( error => {
-                if(!error.session){
+                if(!error.session && error.field !== 'modal'){
                     const input = document.querySelector(`.${formName} #${error.field}`);
 
+                    console.log(error.field)
                     input.classList.add("border","border-danger","text-danger");
 
                     document.querySelector(`.${formName} .error.${error.field}`)
                         .innerHTML = error.innerHTML = iconError + error.message;
                 } else {
-                    modal('failed', 'Lo sentimos !', response.data[0].session);
+
+                    response.data[0].session
+                        ? modal('failed', 'Lo sentimos !', response.data[0].session)
+                        : modal('failed', 'Lo sentimos !', response.data[0].message)
                 }
             })
         }
@@ -93,15 +97,14 @@ const submit = async (url, options, setData, formName, data) => {
 
         let submitresponse;
 
-
         if(response.data.updateduser){
-            setData({...data, user: response.data.updateduser})
-            submitresponse = { successful: true }
+            setData({...data, user: response.data.updateduser});
+            submitresponse = { successful: true };
         } else {
 
             if(response.message){
-                setData({...data, messages: [ ...data.messages, response.data ]})
-                submitresponse = { successful: true }
+                setData({...data, messages: [ ...data.messages, response.data ]});
+                submitresponse = { successful: true };
             } else {
                 setData(response.data);
             }
