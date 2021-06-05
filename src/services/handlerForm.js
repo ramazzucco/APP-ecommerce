@@ -6,6 +6,7 @@ const cancel = (formName) => {
     const body = document.querySelector("body");
     const inputs = document.querySelectorAll("." + formName + " input");
     const selects = document.querySelectorAll("." + formName + " select");
+    const textareas = document.querySelectorAll("." + formName + " textarea");
     const inputserrors = document.querySelectorAll("." + formName + " .error");
 
     if(inputserrors){
@@ -50,13 +51,34 @@ const cancel = (formName) => {
 
             selects.forEach((select) => {
                 select.options.selectedIndex = 0;
+
+                if(select.className.includes("text-danger")){
+                    select.classList.remove("border","border-danger","text-danger");
+                }
             });
 
         } else {
 
             selects[0].options.selectedIndex = 0;
 
+            if(selects[0].className.includes("text-danger")){
+                selects[0].classList.remove("border","border-danger","text-danger");
+            }
         }
+
+    }
+
+    if (textareas) {
+
+        textareas.forEach( textarea => {
+
+            textarea.value = "";
+
+            if(textarea.className.includes("text-danger")){
+                textarea.classList.remove("border","border-danger","text-danger");
+            }
+        })
+
 
     }
 };
@@ -88,8 +110,14 @@ const submit = async (url, options, setData, formName, data) => {
                     response.data[0].session
                         ? modal('failed', 'Lo sentimos !', response.data[0].session)
                         : modal('failed', 'Lo sentimos !', response.data[0].message)
+
+                    submitresponse = { successful: false };
                 }
             })
+
+            if(!response.data[0].session && response.data[0].field !== 'modal'){
+                document.querySelector(`.${formName} #${response.data[0].field}`).focus();
+            }
         }
 
         return submitresponse;
@@ -105,7 +133,20 @@ const submit = async (url, options, setData, formName, data) => {
             if(response.message){
                 setData({...data, messages: [ ...data.messages, response.data ]});
                 submitresponse = { successful: true };
-            } else {
+            }else if(response.product){
+                submitresponse = { successful: true };
+
+                if(response.create){
+                    setData([...data, response.data]);
+                }
+                if(response.update){
+                    setData(response.data)
+                }
+                if(response.delete){
+                    setData(response.data)
+                    submitresponse.productsdeleted = response.productsdeleted;
+                }
+            }else{
                 setData(response.data);
             }
 

@@ -31,6 +31,7 @@ export default function Input(props) {
                                 {props.label.icon ? props.label.icon : ""}
                                 {props.label.title}
                             </label>
+                            <i className={props.input.icon ? props.input.icon : ''}></i>
                             <input
                                 className={props.input.className}
                                 id={props.input.id}
@@ -46,7 +47,11 @@ export default function Input(props) {
                     )
             }
             <div
-                className={"d-flex justify-content-center align-items-center w-100 text-danger " + props.input.error}
+                className={
+                    props.input.classNameError
+                        ? props.input.classNameError + ' ' + props.input.error
+                        : "d-flex justify-content-center align-items-center w-100 text-danger " + props.input.error
+                }
                 style={{fontSize: "0.9rem"}}
             ></div>
         </div>

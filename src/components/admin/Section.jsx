@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route } from 'react-router';
 
 // Components.
@@ -8,15 +8,32 @@ import Lastproduct from './home/Lastproduct';
 import Categories from './home/Categories';
 import Views from './home/Views';
 import Users from './home/Users';
+import Products from './products/Products';
 
 export default function Section(props) {
+
+    const [ categories, setCategories ] = useState([])
+
+    useEffect(() => {
+        const categorys = props.categories.map( category => {
+            return {
+                id: category.category.id,
+                title: category.category.title,
+            }
+        })
+        setCategories(categorys);
+    },[props.categories])
+
     return (
         <div className="main col-12 d-flex flex-column">
             <Header
                 admin={props.admin}
                 users={props.users}
                 products={props.products}
+                activelink={props.activelink}
+                setActivelink={props.setActivelink}
             />
+            <hr className='text-center bg-champagne-contrast m-0 w-100' />
             <Route exact path='/admin'>
                 <div className="home d-flex flex-wrap align-items-start">
 
@@ -42,6 +59,13 @@ export default function Section(props) {
                         />
                     </div>
                 </div>
+            </Route>
+            <Route path='/admin/productos'>
+                <Products
+                    products={props.products}
+                    setProducts={props.setProducts}
+                    categories={categories}
+                />
             </Route>
         </div>
     )

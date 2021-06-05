@@ -194,7 +194,6 @@ export default function Main(props) {
                             setUser={setUser}
                             setAdmin={setAdmin}
                             messages={products.messages}
-                            products={products}
                             width={width}
                         />
                         : <Redirect to='/page' />

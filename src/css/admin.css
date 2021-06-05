@@ -16,6 +16,7 @@
     --opal: #9dbebbff;
     --champagne: #f4e9cdff;
     --champagne-contrast: rgb(231, 222, 200);
+    --champagne-contrast-2: rgb(155, 148, 131);
 
     /* SCSS RGB */
     --rgba-rich-black-fogra-29: rgba(3, 25, 38, 1);
@@ -31,7 +32,9 @@
 .text-opal {color: #9dbebbff;}
 .text-champagne {color: #f4e9cdff;}
 .text-champagne-contrast {color: var(--champagne-contrast);}
+.text-champagne-contrast-2 {color: var(--champagne-contrast-2);}
 
+.rgba3 { background: rgba(0,0,0,.3); }
 .bg-rich-black-fogra-29 {background-color: #031926ff;}
 .bg-metallic-seaweed {background-color: #468189;}
 .bg-metallic-seaweed-contrast {background-color: var(--rgba-metallic-seaweed);}
@@ -39,12 +42,22 @@
 .bg-opal {background-color: #9dbebbff;}
 .bg-champagne {background-color: #f4e9cdff;}
 .bg-champagne-contrast {background-color: var(--champagne-contrast);}
+.bg-champagne-contrast-2 {background-color: var(--champagne-contrast-2);}
+
+.border-metallic-seaweed {
+    border: 1px solid var(--metallic-seaweed);
+}
 
 .admin-container {
     height: 100vh;
+    font-size: 1rem;
+    background-color: var(--champagne);
 }
 
 /* -----------------------    iconos y link   ------------------------ */
+.admin-container a {
+    color:  var(--metallic-seaweed),
+}
 .admin-container a:hover,
 .admin-container p.logout:hover {
     color: #366369;
@@ -52,11 +65,6 @@
 }
 .admin-container i:hover {
     color: var(--metallic-seaweed);
-}
-
-.admin-container {
-    font-size: 18px;
-    background-color: var(--champagne);
 }
 
 .admin-container i.fa-bars:hover {
@@ -75,11 +83,84 @@ i.fa-dollar-sign:hover,
     cursor: default;
 }
 
+.products i:hover {
+    color: var(--opal);
+}
+/* -----------------------    buttons   ------------------------ */
+.btn-admin {
+    background: var(--metallic-seaweed);
+    color: var(--champagne);
+    border: 1px solid var(--metallic-seaweed);
+    border-radius: 5px;
+    padding: 5px 30px;
+    box-shadow: 3px 3px 10px 3px rgba(0,0,0,.3);
+}
+.btn-admin:hover {
+    background: var(--rgba-metallic-seaweed);
+    color: var(--champagne-contrast);
+}
+.btn-admin:active {
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,.3);
+}
+
+.btn-admin-outline {
+    background: none;
+    color: var(--metallic-seaweed);
+    border: 1px solid var(--metallic-seaweed);
+    border-radius: 5px;
+    padding: 5px 30px;
+    box-shadow: 3px 3px 10px 2px rgba(0,0,0,.3);
+}
+.btn-admin-outline:hover {
+    background: var(--champagne-contrast);
+}
+.btn-admin-outline:active {
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,.3);
+}
+
 /* -----------------------    inputs   ------------------------ */
-.admin-container input:focus,
-.admin-container textarea:focus {
+.admin-container input,
+.admin-container form input,
+.admin-container form select,
+.admin-container form textarea {
+    border: 1px solid var(--metallic-seaweed);
     color: var(--metallic-seaweed);
 }
+.admin-container label.file {
+    border: 1px solid var(--metallic-seaweed);
+    border-radius: 5px;
+}
+.admin-container form .input-group:hover > label,
+.admin-container form .input-group:hover > i {
+    color: var(--champagne-contrast-2);
+}
+.admin-container form .input-group:hover > input,
+.admin-container form .input-group:hover > select,
+.admin-container form .input-group:hover > textarea,
+.admin-container form .input-group:hover > label.file {
+    border: 1px solid var(--champagne-contrast-2);
+    color: var(--champagne-contrast-2);
+}
+.admin-container .input-group:focus-within > label,
+.admin-container .input-group:focus-within > option,
+.admin-container .input-group:focus-within > i {
+    color: var(--champagne-contrast-2);
+}
+.admin-container form option:hover {
+    background: var(--metallic-seaweed);
+}
+.admin-container input:focus,
+.admin-container form select:focus,
+.admin-container textarea:focus {
+    border: 1px solid var(--champagne-contrast-2);
+    color: var(--champagne-contrast-2);
+}
+.admin-container form input:invalid ~ .input-group,
+.admin-container form select:invalid ~ .input-group,
+.admin-container form textarea:invalid ~ .input-group {
+    border: 1px solid #DC3545;
+}
+
 .search-admin input {
     border: 1px solid var(--opal);
     border-right: none;
@@ -87,6 +168,7 @@ i.fa-dollar-sign:hover,
     padding-left: 8px;
     background: var(--champagne);
     color: var(--opal);
+    font-size: 18px;
     transition: all .7s ease;
 }
 .search-admin label {
@@ -172,15 +254,13 @@ i.fa-dollar-sign:hover,
 }
 .element-sidebar-up {
     border-radius: 0 5px 5px 0;
-    background: linear-gradient(145deg, #dcd2b9, #fff9db);
-    box-shadow: inset -3px -3px 10px #3c6e74,
-                inset 3px 3px 10px #51949e,
-                3px 3px 10px #3c6e74,
-                -3px -3px 10px #51949e;
+    background: linear-gradient(145deg, #468189, #51939c);
+    box-shadow: inset -1px -1px 1px #3c6e74,
+                inset 1px 1px 1px #62b4be,
+                1px 1px 1px #3c6e74,
+                -1px -1px 1px #62b4be;
 }
-/* .element-down {
 
-} */
 .element2-up {
     background: #f4e9cd;
     box-shadow:  7px 7px 14px #cfc6ae,
@@ -206,7 +286,7 @@ i.fa-dollar-sign:hover,
     background-color: var(--rgba-metallic-seaweed);
     padding: 8px;
     top: -66px;
-    left: -50%;
+    left: 50%;
     transform: translateX(-25%);
     color: white;
     min-width: 200px;
@@ -218,7 +298,7 @@ i.fa-dollar-sign:hover,
 .mytooltip::after {
     content: '';
     position: absolute;
-    top: -33px;
+    top: -36px;
     left: 50%;
     width: 15px;
     height: 16px;
@@ -238,6 +318,30 @@ i.fa-dollar-sign:hover,
 a .mytooltip::before,
 a .mytooltip.down::before {
     font-size: .7rem;
+}
+/* -----------------------    buttons   ------------------------ */
+button.underline {
+    border: none;
+}
+button.underline.active {
+    filter: drop-shadow(5px 5px 3px  rgba(0,0,0,.3));
+    border-bottom: 2px solid var(--metallic-seaweed);
+}
+button.underline::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    background: var(--metallic-seaweed);
+    transition: width .7s ease;
+}
+button.underline.hover::before {
+    bottom: -2px;
+    width: 5%;
+}
+button:focus {
+    outline: none;
 }
 
 /* -----------------------    sidebar   ------------------------ */
@@ -266,6 +370,9 @@ a .mytooltip.down::before {
     transform: rotateY(360deg);
     height: 10vh;
     transition: all 1s ease-in-out;
+}
+.sidebar .brand .logo {
+    transform: scale(.9);
 }
 .sidebar .brand .logo:hover {
     transform: scale(1.3);
@@ -330,7 +437,8 @@ a .mytooltip.down::before {
     min-height: 10vh;
     max-height: 10vh;
 }
-.main .home {
+.main .home,
+.main .products {
     min-height: 90vh;
     max-height: 90vh;
 }
@@ -340,51 +448,60 @@ a .mytooltip.down::before {
 }
 
 .widget {
-    border-left: 5px solid;
+    min-width: 230px;
+    max-width: 230px;
+    border-left: 10px solid;
     width: 220px;
 }
 
 .lastproduct {
-    min-height: 304px;
+    min-height: 377px;
 }
 .lastproduct .info {
     height: 0;
     top: 0;
-    background-color: rgba(0,0,0,.5);
+    background-color: rgba(52, 96, 102, .7);
     transition: all 1s ease;
 }
 
 .views .top10,
 .views .notviews {
-    min-height: 144px;
-    max-height: 144px;
+    min-height: 28vh;
+    max-height: 28vh;
     overflow: hidden;
     z-index: 0;
-    transition: overflow 1s ease, z-index 1s ease, max-height .5s ease;
+    transition: overflow 1s ease, z-index 1s ease, max-height .7s ease;
 }
-.views .top10:hover {
-    max-height: 282px;
-    z-index: 5;
-    overflow: visible;
-}
+.views .top10:hover,
 .views .notviews:hover {
-    max-height: 100%;
+    max-height: 100vh;
     z-index: 5;
     overflow: visible;
-}
-.views .top10 section div,
-.views .notviews section div {
-    border-bottom: 1px solid var(--champagne-contrast);
-}
-.views .top10 section div:last-child,
-.views .notviews section div:last-child {
-    border-radius: 0 0 5px 5px;
-    margin-bottom: 16px;
 }
 
 .user .incommingmessage {
     top: -10px;
     left: -10px;
+}
+
+.admin-container .items-product.show,
+.admin-container .add-product.show,
+.admin-container .modify-product.show {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100%;
+    overflow: visible;
+    transition: all 1s ease;
+}
+.admin-container .items-product,
+.admin-container .add-product,
+.admin-container .modify-product {
+    position: absolute;
+    max-height: 0%;
+    left: -100%;
+    overflow: hidden;
+    transition: all 1s ease;
 }
 
 /* -------------- barra vertical -------------- */
@@ -419,8 +536,15 @@ a .mytooltip.down::before {
     .sidebar:hover {
         min-width: 360px;
     }
+    .widget {
+        min-width: 200px;
+        max-width: 200px;
+    }
 }
 @media(max-width: 768px){
+    .admin-container {
+        font-size: 1rem;
+    }
     a {
         padding: 0;
     }
@@ -441,8 +565,15 @@ a .mytooltip.down::before {
     .search-admin:focus-within > #listsearch-admin {
         top: 77px;
     }
+    .widget {
+        min-width: 180px;
+        max-width: 180px;
+    }
 }
 @media(max-width: 540px){
+    .admin-container {
+        font-size: .9rem;
+    }
     .sidebar {
         min-width: 33px;
         max-width: 55px;
@@ -454,6 +585,9 @@ a .mytooltip.down::before {
         top: 77px;
     }
     .widget {
-        width: 100%;
+        min-width: 100%;
+    }
+    button.underline.hover::before {
+        width: 20%;
     }
 }

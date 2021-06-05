@@ -11,16 +11,14 @@ export default function Widgets(props) {
                     return (
                         <div
                             key={i}
-                            className={`widget d-flex justify-content-center border-${widget.type} rounded-lg py-2 px-4
-                                bg-champagne-contrast text-${widget.type} element-up mb-3 mb-md-0`
+                            className={`widget d-flex justify-content-start align-items-center border-${widget.type} rounded-lg py-3 pl-5 pl-sm-3 pl-md-4 pr-4
+                                text-champagne element-sidebar-up mb-3 mb-md-0`
                             }
                         >
-                            <div>
+                            <i className={`fas ${widget.icon} text-${widget.type} fa-3x`}></i>
+                            <div className='d-flex flex-column pl-5 pl-sm-3'>
                                 <p className="title mb-1">{widget.text}</p>
-                                <p className='h5'>
-                                    <i className={`fas ${widget.icon} mr-3`}></i>
-                                    {widget.value}
-                                </p>
+                                <p className='h5 mb-0'>{widget.value}</p>
                             </div>
                         </div>
                     );

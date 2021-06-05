@@ -22,6 +22,7 @@ export default function Modalinfo(props) {
         qS('.modal-info section p').innerHTML = '';
         qS('.modal-info section div').classList.value = '';
         qS('.modal-info section button').classList.value = '';
+        qS('.modal-info section button.other-action').classList.value = 'other-action d-none';
 
     }
 
@@ -39,7 +40,7 @@ export default function Modalinfo(props) {
                 className={`modal-info w-100 d-flex justify-content-center align-items-center position-sticky`}
                 style={{
                     top: '50%',
-                    transform: `translate('0%',-50%)`,
+                    transform: `translateY(-50%)`,
                     zIndex: '5'
                 }}
             >
@@ -58,8 +59,9 @@ export default function Modalinfo(props) {
                                 className=''
                                 onClick={closeModal}
                             >
-                                Cerrar
+                                Cancelar
                             </button>
+                            <button className='other-action d-none'></button>
                         </div>
                     </section>
                 </div>

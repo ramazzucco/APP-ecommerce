@@ -5,7 +5,9 @@ import '../css/admin.css';
 // Components.
 import Sidebar from './admin/Sidebar';
 import Section from './admin/Section';
+import Modalinfo from './Modalinfo';
 import Error from './Error';
+import Loadinginfo from './Loadinginfo';
 
 export default function Admin(props) {
 
@@ -15,9 +17,12 @@ export default function Admin(props) {
     const [ views, setViews ] = useState([])
     const [ users, setUsers ] = useState([])
     const [ messages, setMessages ] = useState([])
+    const [ products, setProducts ] = useState([])
     const [ userswhithmessages, setUserswhithmessages ] = useState([])
     const [ incommingmessages, setIncommingmessages ] = useState([])
     const [ error, setError ] = useState([])
+    const [ activelink, setActivelink ] = useState('Home')
+
 
     const getData = async (datatofetch, setData) => {
         const token = localStorage.getItem('token');
@@ -54,7 +59,10 @@ export default function Admin(props) {
         getData('views', setViews);
         getData('users', setUsers);
         getData('messages', setMessages);
+        if(products.length === 0) getData('products', setProducts);
+    },[products])
 
+    useEffect(() => {
         const refresh = () => {
             setInterval(() => {
                 getData('messages', setMessages);
@@ -69,13 +77,18 @@ export default function Admin(props) {
         error.length
             ? <Error error={error[0]} />
             : <div className='admin-container d-flex m-0 p-0'>
+                <Modalinfo width={props.width} />
+                <Loadinginfo width={props.width} />
                 <Sidebar
                     admin={props.user.user}
                     setAdmin={props.setAdmin}
                     setUser={props.setUser}
+                    activelink={activelink}
+                    setActivelink={setActivelink}
                 />
                 <Section
-                    products={props.products}
+                    products={products}
+                    setProducts={setProducts}
                     admin={props.user.user}
                     widgets={widgets}
                     lastproduct={lastproduct}
@@ -87,6 +100,8 @@ export default function Admin(props) {
                     setMessages={setMessages}
                     incommingmessages={incommingmessages}
                     userswhithmessages={userswhithmessages}
+                    activelink={activelink}
+                    setActivelink={setActivelink}
                 />
             </div>
 

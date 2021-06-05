@@ -10,10 +10,9 @@ export default function Users(props) {
     const users = props.users ? props.users.filter( user => user.status !== 2) : [];
 
     return (
-        <div className="users col-12 element-up overflow-hidden">
+        <div className="users col-12 p-0 element-up overflow-hidden">
             <header
-                className="d-flex justify-content-between align-items-center py-3 pl-2 pb-2 mb-1 text-left text-metallic-seaweed"
-                style={{ borderBottom: "1px solid var(--metallic-seaweed)" }}
+                className="d-flex justify-content-between align-items-center py-2 px-3 pb-2 mb-1 text-left bg-metallic-seaweed text-champagne"
             >
                 Usuarios
                 <i className="fas fa-sync-alt ml-auto" onClick={() => props.getData('messages', props.setMessages)}></i>
@@ -26,7 +25,7 @@ export default function Users(props) {
                             <Link
                                 key={i}
                                 to={`/admin/user/${user.id}`}
-                                className="user d-flex align-items-center pl-3 pl-sm-5 pl-lg-3 my-3 my-lg-2"
+                                className="user d-flex align-items-center pl-4 pl-sm-5 pl-lg-4 my-3 my-lg-2"
                             >
                                 <div className='position-relative'>
                                     <div

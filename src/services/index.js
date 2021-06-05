@@ -12,7 +12,9 @@ import { urlbase } from "./getInfoPage";
 const qS = (selector) => {
     return document.querySelector(selector);
 }
-
+const qSall = (selector) => {
+    return document.querySelectorAll(selector);
+}
 const gEbID = (id) => {
     return document.getElementById(id);
 }
@@ -216,17 +218,35 @@ const modal = (action, title, content) => {
         className: {
             div: 'col-10 col-md-8 col-lg-6 bg-main-sombra-2 mx-auto p-5 shadow position-absolute rounded',
             header: 'd-flex justify-content-center align-items-center',
-            icon: action === 'successful' ?
-                'fas fa-check-circle fa-2x text-success' : 'fas fa-exclamation-triangle fa-2x text-danger',
-            title: `mb-1 ml-3 ${action === 'successful' ? 'text-success' : 'text-danger'} h3`,
+            icon: '',
+            title: `mb-1 ml-3 h3`,
             section: 'mt-5',
-            content: `text-center text-${action === 'successful' ? 'success' : 'danger'} mb-0`,
+            content: `text-center mb-0`,
             divbutton: 'button d-flex justify-content-center',
-            button: `w-50 btn btn-sm btn-outline-${action === 'successful' ? 'success' : 'danger'} mt-5`
+            button: `w-50 btn btn-sm mt-5`
         },
         style: {
-            div: `border-top: 5px solid ${action === 'successful' ? '#28A745' : '#DC3545'}`
+            div: 'border-top: 5px solid'
         }
+    }
+
+    if(action === 'successful'){
+        data.className.div = data.className.div + ' text-success';
+        data.className.icon = data.className.icon + ' fas fa-check-circle fa-2x text-success';
+        data.className.button = data.className.button + ' btn-outline-success';
+        data.style.div = data.style.div + ' #28A745';
+    }
+    if(action === 'warning'){
+        data.style.div = data.style.div + ' #FFC107';
+        data.className.div = data.className.div + ' text-warning';
+        data.className.icon = data.className.icon + ' fas fa-exclamation-triangle fa-2x text-warning';
+        data.className.button = data.className.button + ' btn-outline-warning';
+    }
+    if(action === 'failed'){
+        data.style.div = data.style.div + ' #DC3545';
+        data.className.div = data.className.div + ' text-danger';
+        data.className.icon = data.className.icon + ' fas fa-exclamation-triangle fa-2x text-danger';
+        data.className.button = data.className.button + ' btn-outline-danger';
     }
 
     qS('.container-modalinfo').classList.toggle('d-none');
@@ -249,6 +269,107 @@ const modal = (action, title, content) => {
 
 }
 
+const productListBy = () => {
+    const id = (a,b) => {
+        if (a.id > b.id) {
+            return 1;
+        }
+        if (a.id < b.id) {
+            return -1;
+        }
+        return 0;
+    }
+
+    const category = (a,b) => {
+        if (a.category.title > b.category.title) {
+            return 1;
+        }
+        if (a.category.title < b.category.title) {
+            return -1;
+        }
+        return 0;
+    }
+
+    const name = (a,b) => {
+        if (a.name > b.name) {
+            return 1;
+        }
+        if (a.name < b.name) {
+            return -1;
+        }
+        return 0;
+    }
+
+    const brand = (a,b) => {
+        if (a.marca > b.marca) {
+            return 1;
+        }
+        if (a.marca < b.marca) {
+            return -1;
+        }
+        return 0;
+    }
+
+    const price = (a,b) => {
+        if (Number(a.price) > Number(b.price)) {
+            return 1;
+        }
+        if (Number(a.price) < Number(b.price)) {
+            return -1;
+        }
+        return 0;
+    };
+
+    const discount = (a,b) => {
+        if (a.discount > b.discount) {
+            return 1;
+        }
+        if (a.discount < b.discount) {
+            return -1;
+        }
+        return 0;
+    }
+
+    const stock = (a,b) => {
+        if (a.stock > b.stock) {
+            return 1;
+        }
+        if (a.stock < b.stock) {
+            return -1;
+        }
+        return 0;
+    }
+
+    return {
+        id,
+        category,
+        name,
+        brand,
+        price,
+        discount,
+        stock
+    }
+}
+
+const compareObjects = (obj1,obj2) => {
+    const haschange = [];
+
+    if(Object.keys(obj1).length === Object.keys(obj2).length){
+        const objlength = Object.keys(obj1).length - 1;
+        const ob1values = Object.values(obj1).slice(0,objlength);
+        const obj2values = Object.values(obj2).slice(0,objlength);
+
+        for (let i = 0; i < objlength ; i++) {
+            haschange.push(Object.is(`${ob1values[i]}`,`${obj2values[i]}`))
+        }
+    } else {
+        window.alert('La funcion ("compareObjects") compara objetos con la misma cantidad de propiedades.')
+        console.log('La funcion ("compareObjects") compara objetos con la misma cantidad de propiedades.');
+    }
+
+    return haschange.every( value => value === true);
+}
+
 export {
     // width,
     getRememberTheme,
@@ -263,6 +384,9 @@ export {
     toggleIcon,
     saveUserPreference,
     qS,
+    qSall,
     gEbID,
     modal,
+    productListBy,
+    compareObjects
 }

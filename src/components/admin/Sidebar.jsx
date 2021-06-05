@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { urlbase } from '../../services/getInfoPage';
 
 export default function Sidebar(props) {
-
-    const [ activelink, setActivelink ] = useState('Home')
 
     const classnametitle = 'title mb-0 text-truncate text-metallic-seaweed-contrast';
 
@@ -38,7 +36,7 @@ export default function Sidebar(props) {
             title: 'Home',
             icon: <i className="fas fa-home text-metallic-seaweed-contrast"></i>,
             classname: {
-                link: `${activelink === 'Home' ? 'active' : ''}`,
+                link: `${props.activelink === 'Home' ? 'active' : ''}`,
                 title: classnametitle
             },
         },
@@ -47,7 +45,7 @@ export default function Sidebar(props) {
             title: 'Productos',
             icon: <i className="fas fa-box-open text-metallic-seaweed-contrast"></i>,
             classname: {
-                link: `${activelink === 'Productos' ? 'active' : ''}`,
+                link: `${props.activelink === 'Productos' ? 'active' : ''}`,
                 title: classnametitle
             },
         },
@@ -56,7 +54,7 @@ export default function Sidebar(props) {
             title: 'Usuarios',
             icon: <i className="fas fa-users text-metallic-seaweed-contrast"></i>,
             classname: {
-                link: `${activelink === 'Usuarios' ? 'active' : ''}`,
+                link: `${props.activelink === 'Usuarios' ? 'active' : ''}`,
                 title: classnametitle
             },
         },
@@ -65,7 +63,7 @@ export default function Sidebar(props) {
             title: 'Configuracion',
             icon: <i className="fas fa-cog text-metallic-seaweed-contrast"></i>,
             classname: {
-                link: `${activelink === 'Configuracion' ? 'active' : ''}`,
+                link: `${props.activelink === 'Configuracion' ? 'active' : ''}`,
                 title: classnametitle
             },
         },
@@ -73,7 +71,7 @@ export default function Sidebar(props) {
             title: 'Log out',
             icon: <i className="fas fa-sign-out-alt text-metallic-seaweed-contrast"></i>,
             classname: {
-                link: `${activelink === 'Log out' ? 'active' : ''}`,
+                link: `${props.activelink === 'Log out' ? 'active' : ''}`,
                 title: classnametitle
             },
             onClick: logout
@@ -114,7 +112,7 @@ export default function Sidebar(props) {
                             <Link
                                 to={link.path}
                                 className={link.classname.link}
-                                onClick={() => { setActivelink(link.title) }}
+                                onClick={() => { props.setActivelink(link.title) }}
                             >
                                 {link.icon}
                                 <p className={link.classname.title}>

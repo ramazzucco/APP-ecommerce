@@ -102,7 +102,11 @@ export default function Index(props) {
                                     relatedproducts={
                                         props.products.allproducts.filter( prod => prod.category_id === product.category_id)
                                     }
-                                    views={props.products.views.filter( view => view.products_id === product.id)[0]}
+                                    views={
+                                        props.products.views.length
+                                            ? props.products.views.filter( view => view.products_id === product.id)[0]
+                                            : []
+                                    }
                                     user={props.user}
                                     setUser={props.setUser}
                                     items={props.items}

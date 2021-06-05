@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { qS } from "../../services";
 import { urlbase } from "../../services/getInfoPage";
 
 export default function Header(props) {
@@ -47,11 +48,19 @@ export default function Header(props) {
 
     const searchProduct = () => {
         const response = [];
-        props.products.allproducts.map( (product, i) => {
+        props.products.map( (product, i) => {
             if(product.name.toLowerCase().includes(datasearch.toLowerCase()) && datasearch !== ''){
 
                 response.push(
-                    <Link to={`/admin/product/${product.id}`} key={i}>
+                    <Link
+                        key={i}
+                        to={`/admin/productos/modificar/${product.id}`}
+                        onClick={() => {
+                            props.setActivelink('Productos');
+                            setDatasearch('');
+                            qS('.admin-container #search').value = ''
+                        }}
+                    >
                         <p className='option-search-admin pl-3 py-1 pointer mb-0 text-lowercase'>
                             {product.name}
                         </p>
@@ -79,7 +88,15 @@ export default function Header(props) {
                 && datasearch !== ''){
 
                 response.push(
-                    <Link to={`/admin/user/${user.id}`} key={i}>
+                    <Link
+                        key={i}
+                        to={`/admin/usuarios/${user.id}`}
+                        onClick={() => {
+                            props.setActivelink('Usuarios');
+                            setDatasearch('');
+                            qS('.admin-container #search').value = ''
+                        }}
+                    >
                         <p className='option-search-admin pl-3 py-1 pointer mb-0 text-lowercase'>
                             {user.first_name + ' ' + user.last_name}
                         </p>

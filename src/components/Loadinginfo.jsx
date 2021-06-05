@@ -14,7 +14,7 @@ export default function Loadinginfo(props) {
             }}
         >
             <div
-                className='col-9 col-sm-8 col-md-6 col-lg-4 position-sticky shadow p-5 bg-main-sombra-2 rounded'
+                className='loading-card col-9 col-sm-8 col-md-6 col-lg-4 position-sticky shadow p-5 bg-main-sombra-2 rounded'
                 style={{
                     top: '50%',
                     left: '50%',

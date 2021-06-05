@@ -14,9 +14,12 @@ export default function Categories(props) {
                 props.categories && props.categories.length
                     ? props.categories.map( (category, i) => {
                         return (
-                            <div className='d-block py-1 px-4 bg-opal rounded text-center mb-2 element-up' key={i}>
+                            <div
+                                key={i}
+                                className='d-block py-1 px-4 rounded text-center mb-2 element-sidebar-up'
+                            >
                                 <Link to={`/page/${category.category.title}`}>
-                                    <p className='text-metallic-seaweed text-capitalize mb-1'>
+                                    <p className='text-champagne text-capitalize mb-1'>
                                         {category.category.title} ({category.total_products})
                                     </p>
                                 </Link>

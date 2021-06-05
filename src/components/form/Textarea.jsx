@@ -22,8 +22,9 @@ export default function Textarea(props) {
             />
             <div
                 className={
-                    "d-flex justify-content-center align-items-center w-100 text-danger " +
-                    props.textarea.error
+                    props.textarea.classNameError
+                        ? props.textarea.classNameError + ' ' + props.textarea.error
+                        : "d-flex justify-content-center align-items-center w-100 text-danger " + props.textarea.error
                 }
                 style={{ fontSize: "0.9rem" }}
             ></div>
