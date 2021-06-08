@@ -21,7 +21,7 @@
     /* SCSS RGB */
     --rgba-rich-black-fogra-29: rgba(3, 25, 38, 1);
     --rgba-metallic-seaweed: rgba(52, 96, 102, 1);
-    --rgba-green-sheen: rgba(119, 172, 162, 1);
+    --rgba-green-sheen: rgb(96, 143, 134);
     --rgba-opal: rgba(157, 190, 187, 1);
     --rgba-champagne: rgba(244, 233, 205, 1);
 }
@@ -46,6 +46,12 @@
 
 .border-metallic-seaweed {
     border: 1px solid var(--metallic-seaweed);
+}
+.border-champagne {
+    border: 1px solid var(--champagne);
+}
+.border-green-sheen {
+    border: 1px solid var(--green-sheen);
 }
 
 .admin-container {
@@ -87,35 +93,77 @@ i.fa-dollar-sign:hover,
     color: var(--opal);
 }
 /* -----------------------    buttons   ------------------------ */
+.admin-container button {
+    outline: none;
+}
+
 .btn-admin {
-    background: var(--metallic-seaweed);
-    color: var(--champagne);
-    border: 1px solid var(--metallic-seaweed);
     border-radius: 5px;
-    padding: 5px 30px;
+    padding: 10px 30px;
+    border: none;
     box-shadow: 3px 3px 10px 3px rgba(0,0,0,.3);
 }
-.btn-admin:hover {
-    background: var(--rgba-metallic-seaweed);
-    color: var(--champagne-contrast);
-}
-.btn-admin:active {
+.btn-admin:active,
+.btn-admin.active {
     box-shadow: 1px 1px 2px 1px rgba(0,0,0,.3);
 }
 
+.btn-admin.btn-metallic-seaweed:hover,
+.btn-admin.btn-metallic-seaweed.active {
+    background: var(--rgba-metallic-seaweed);
+}
+.btn-admin.btn-metallic-seaweed {
+    background: var(--metallic-seaweed);
+    color: var(--champagne);
+}
+
+.btn-admin.btn-green-sheen:hover,
+.btn-admin.btn-green-sheen.active {
+    background: var(--rgba-green-sheen);
+}
+.btn-admin.btn-green-sheen {
+    background: var(--green-sheen);
+    color: var(--champagne);
+}
+
+/* btn-outline */
+
 .btn-admin-outline {
     background: none;
-    color: var(--metallic-seaweed);
-    border: 1px solid var(--metallic-seaweed);
     border-radius: 5px;
     padding: 5px 30px;
     box-shadow: 3px 3px 10px 2px rgba(0,0,0,.3);
 }
-.btn-admin-outline:hover {
-    background: var(--champagne-contrast);
-}
-.btn-admin-outline:active {
+.btn-admin-outline:active,
+.btn-admin-outline.active {
     box-shadow: 1px 1px 2px 1px rgba(0,0,0,.3);
+}
+
+.btn-admin-outline.btn-champagne {
+    color: var(--green-sheen);
+    border: 1px solid var(--green-sheen);
+}
+.btn-admin-outline.btn-champagne:hover,
+.btn-admin-outline.btn-champagn.active {
+    background: var(--champagne-contrast-2);
+    color: var(--rgba-metallic-seaweed);
+}
+
+.btn-admin-outline.btn-metallic-seaweed {
+    border: 1px solid var(--green-sheen);
+}
+.btn-admin-outline.btn-metallic-seaweed:hover,
+.btn-admin-outline.btn-metallic-seaweed.active {
+    background: var(--metallic-seaweed-contrast-2);
+}
+/* other buttons */
+.products header button {
+    color: var(--champagne);
+    border: none;
+}
+.products header button.active {
+    color: var(--opal);
+    border-bottom: 2px solid var(--opal);
 }
 
 /* -----------------------    inputs   ------------------------ */
@@ -123,11 +171,11 @@ i.fa-dollar-sign:hover,
 .admin-container form input,
 .admin-container form select,
 .admin-container form textarea {
-    border: 1px solid var(--metallic-seaweed);
-    color: var(--metallic-seaweed);
+    border: 1px solid var(--green-sheen);
+    color: var(--green-sheen);
 }
 .admin-container label.file {
-    border: 1px solid var(--metallic-seaweed);
+    border: 1px solid var(--green-sheen);
     border-radius: 5px;
 }
 .admin-container form .input-group:hover > label,
@@ -273,13 +321,13 @@ i.fa-dollar-sign:hover,
 }
 
 /* -----------------------    tooltip   ------------------------ */
-.mytooltip {
+.admin-container .mytooltip {
     display: none;
     position: relative;
     min-width: 100%;
     transition: all 1s ease;
 }
-.mytooltip::before {
+.admin-container .mytooltip::before {
     content: attr(data-title);
     position: absolute;
     border-radius: 3px;
@@ -295,7 +343,7 @@ i.fa-dollar-sign:hover,
     box-shadow: 3px 3px 3px 1px rgba(0,0,0,.3);
     z-index: 10;
 }
-.mytooltip::after {
+.admin-container .mytooltip::after {
     content: '';
     position: absolute;
     top: -36px;
@@ -307,41 +355,25 @@ i.fa-dollar-sign:hover,
     transform: translateX(-50%) rotate(45deg);
     z-index: 11;
 }
-.mytooltip.down::before {
+.admin-container .mytooltip.down::before {
     top: 66px;
 }
-.mytooltip.down::after {
+.admin-container .mytooltip.down::after {
     top: 59px;
     right: 50%;
     box-shadow: 0 0 0 rgba(0,0,0,.3);
 }
-a .mytooltip::before,
-a .mytooltip.down::before {
+.admin-container a .mytooltip::before,
+.admin-container a .mytooltip.down::before {
     font-size: .7rem;
 }
-/* -----------------------    buttons   ------------------------ */
-button.underline {
-    border: none;
-}
-button.underline.active {
-    filter: drop-shadow(5px 5px 3px  rgba(0,0,0,.3));
-    border-bottom: 2px solid var(--metallic-seaweed);
-}
-button.underline::before {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -2px;
+
+/* -----------------------    viñeta messages users   ------------------------ */
+.admin-container .users .user .messages-user .messages-container .admin .content::before {
     background: var(--metallic-seaweed);
-    transition: width .7s ease;
 }
-button.underline.hover::before {
-    bottom: -2px;
-    width: 5%;
-}
-button:focus {
-    outline: none;
+.admin-container .users .user .messages-user .messages-container .user .content::before {
+    background: var(--green-sheen);
 }
 
 /* -----------------------    sidebar   ------------------------ */
@@ -356,7 +388,7 @@ button:focus {
     padding: 16px;
     background: var(--metallic-seaweed);
     z-index: 6;
-    transition: all 1s ease;
+    transition: all .7s ease;
 }
 .sidebar:hover {
     align-items: center;
@@ -440,7 +472,6 @@ button:focus {
 .main .home,
 .main .products {
     min-height: 90vh;
-    max-height: 90vh;
 }
 .main .home .products,
 .main .home .users {
@@ -484,19 +515,27 @@ button:focus {
     left: -10px;
 }
 
-.admin-container .items-product.show,
-.admin-container .add-product.show,
-.admin-container .modify-product.show {
+.admin-container .products .items-product.show,
+.admin-container .products .add-product.show,
+.admin-container .products .modify-product.show,
+.admin-container .users .items-user.show,
+.admin-container .users .detail-user.show,
+.admin-container .users .messages-user.show,
+.admin-container .users .orders-user.show {
     position: absolute;
-    top: 30px;
+    top: 35px;
     left: 0;
     width: 100%;
     overflow: visible;
     transition: all 1s ease;
 }
-.admin-container .items-product,
-.admin-container .add-product,
-.admin-container .modify-product {
+.admin-container .products .items-product,
+.admin-container .products .add-product,
+.admin-container .products .modify-product,
+.admin-container .users .items-user,
+.admin-container .users .detail-user,
+.admin-container .users .messages-user,
+.admin-container .users .orders-user {
     position: absolute;
     max-height: 0%;
     left: -100%;
@@ -569,6 +608,15 @@ button:focus {
         min-width: 180px;
         max-width: 180px;
     }
+    .admin-container .users .messages-user.show,
+    .admin-container .users .orders-user.show {
+        top: 99px;
+    }
+    .admin-container .users .detail-user,
+    .admin-container .users .messages-user,
+    .admin-container .users .orders-user {
+        left: -125%;
+    }
 }
 @media(max-width: 540px){
     .admin-container {
@@ -587,7 +635,14 @@ button:focus {
     .widget {
         min-width: 100%;
     }
-    button.underline.hover::before {
-        width: 20%;
+    .admin-container .users .detail-user.show {
+        top: 44px;
+    }
+    .admin-container .users .messages-user.show,
+    .admin-container .users .orders-user.show {
+        top: 180px;
+    }
+    button.underline {
+        padding: 5px 20px;
     }
 }

@@ -125,14 +125,13 @@ export default function Add(props) {
 
     return (
         <div className='add-product section pl-4 pl-lg-2 pr-md-0'>
-            <div className="title d-flex align-items-center bg-metallic-seaweed text-champagne text-left
-                border-metallic-seaweed rounded pl-4 py-2 mt-5"
+            <div className="title d-flex align-items-center bg-opal text-champagne text-left rounded pl-4 py-1 mt-5"
             >
                 <h3>Agregar producto</h3>
             </div>
             <div className='my-3 col-12 px-4'>
                 <button
-                    className='btn-admin'
+                    className='btn-admin btn-green-sheen'
                     onClick={(e) => e.target.nextSibling.classList.toggle('d-none')}
                 >
                     Agregar multiples productos

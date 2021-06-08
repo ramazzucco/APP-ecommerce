@@ -7,8 +7,10 @@ import Widgets from './home/Widgets';
 import Lastproduct from './home/Lastproduct';
 import Categories from './home/Categories';
 import Views from './home/Views';
-import Users from './home/Users';
+// import Users from './Home/Users';
+import Users from './users/Users';
 import Products from './products/Products';
+import Messages from './home/Messages';
 
 export default function Section(props) {
 
@@ -32,10 +34,11 @@ export default function Section(props) {
                 products={props.products}
                 activelink={props.activelink}
                 setActivelink={props.setActivelink}
+                incommingmessages={props.incommingmessages}
             />
             <hr className='text-center bg-champagne-contrast m-0 w-100' />
             <Route exact path='/admin'>
-                <div className="home d-flex flex-wrap align-items-start">
+                <div className="home d-flex flex-wrap">
 
                     <div className='products col-12 col-lg-9 pr-0 mt-3 d-flex flex-wrap align-items-start justify-content-between'>
                         <Widgets widgets={props.widgets} />
@@ -51,11 +54,13 @@ export default function Section(props) {
                     </div>
 
                     <div className="users col-12 col-md-7 col-lg-3 pr-0 mt-3 d-flex align-items-start">
-                        <Users
+                        <Messages
                             users={props.users}
                             incommingmessages={props.incommingmessages}
                             getData={props.getData}
                             setMessages={props.setMessages}
+                            setActivelink={props.setActivelink}
+                            setIncommingmessages={props.setIncommingmessages}
                         />
                     </div>
                 </div>
@@ -65,6 +70,17 @@ export default function Section(props) {
                     products={props.products}
                     setProducts={props.setProducts}
                     categories={categories}
+                />
+            </Route>
+            <Route path='/admin/usuarios'>
+                <Users
+                    admin={props.admin}
+                    users={props.users}
+                    products={props.products}
+                    setProducts={props.setProducts}
+                    categories={categories}
+                    messages={props.messages}
+                    setMessages={props.setMessages}
                 />
             </Route>
         </div>

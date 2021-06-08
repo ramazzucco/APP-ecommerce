@@ -99,6 +99,7 @@ export default function Admin(props) {
                     getData={getData}
                     setMessages={setMessages}
                     incommingmessages={incommingmessages}
+                    setIncommingmessages={setIncommingmessages}
                     userswhithmessages={userswhithmessages}
                     activelink={activelink}
                     setActivelink={setActivelink}

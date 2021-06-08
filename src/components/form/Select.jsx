@@ -21,8 +21,8 @@ export default function Select(props) {
                                     className={props.select.classNameOptions}
                                     key={i}
                                     value={option.value}
-                                    disabled='true'
-                                    selected
+                                    disabled={true}
+                                    defaultValue={true}
                                 >
                                     {option.title}
                                 </option>

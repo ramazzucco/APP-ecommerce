@@ -138,7 +138,7 @@ export default function Modify(props) {
     const datainputimage = {
             div: 'w-100',
             label: {
-                className: 'w-100 btn-admin mt-3 pointer text-center py-2 mb-1 px-2',
+                className: 'w-100 btn-admin btn-green-sheen mt-3 pointer text-center py-2 mb-1 px-2',
                 htmlfor: "image",
                 title: "Cambiar imagen",
                 icon: <i className="fas fa-upload align-self-center mr-3"></i>
@@ -159,7 +159,7 @@ export default function Modify(props) {
 
     return (
         <div className='modify-product section pl-4 pl-lg-2 pr-md-0 my-3'>
-            <div className="title bg-metallic-seaweed text-champagne text-left border-metallic-seaweed rounded px-4 py-2 mt-4">
+            <div className="title bg-opal text-champagne text-left rounded px-4 py-1 mt-4">
                 <h3 className='d-flex flex-wrap align-items-center'>
                     Modificar producto
                     <span className='h4 ml-md-5 mb-0 align-self-end text-truncate'>
@@ -168,16 +168,16 @@ export default function Modify(props) {
                 </h3>
             </div>
             <div className='col-12 d-flex flex-wrap align-items-center my-3 px-4'>
-                <label htmlFor="order-list-product" className='text-metallic-seaweed pl-1 pl-sm-0 mb-0 mr-4'>
+                <label htmlFor="order-list-product" className='text-green-sheen pl-1 pl-sm-0 mb-0 mr-4'>
                     Seleccione un producto
                 </label>
                 <select
                     name="order-list-product"
                     id="order-list-product"
-                    className='col-12 col-md-8 col-lg-6 bg-champagne text-metallic-seaweed text-center rounded py-1 px-3'
+                    className='col-12 col-md-8 col-lg-6 bg-champagne text-green-sheen text-center rounded py-1 px-3'
                     onChange={handlerOnChange}
                 >
-                    <option disabled selected>-</option>
+                    <option disabled defaultValue={true}>-</option>
                     {
                         products
                             ? products.map( (product, i) => {
@@ -195,27 +195,27 @@ export default function Modify(props) {
                             </option>
                     }
                 </select>
+            <hr className='mt-3 mb-0 w-100' />
             </div>
-            <hr className='m-0 w-100' />
             <div className='d-flex flex-column-reverse flex-md-row flex-wrap justify-content-center px-4'>
                 {
                     datapost
                         ? <React.Fragment>
                             <Form {...dataform} />
                             <div className='image d-flex flex-column align-items-center col-12 col-md-4'>
-                                <p className='mt-4 mb-2 align-self-start text-metallic-seaweed'>
+                                <p className='mt-4 mb-2 align-self-start text-green-sheen'>
                                     Imagen
                                 </p>
                                 <img
                                     src={`${urlbase}/images/${datapost.image}`}
                                     alt={`${datapost.name}`}
                                     width='100%'
-                                    className='border-metallic-seaweed rounded'
+                                    className='border-green-sheen rounded'
                                 />
                                 <Input {...datainputimage} />
                             </div>
                         </React.Fragment>
-                        : <p className='text-center text-metallic-seaweed h5 my-5'>
+                        : <p className='text-center h5 my-5'>
                             Ningun producto seleccionado!
                         </p>
                 }

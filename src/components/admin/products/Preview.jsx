@@ -12,8 +12,8 @@ export default function Preview(props) {
     }
 
     return (
-        <div className="product-preview d-none d-md-flex justify-content-center flex-wrap col-4 mt-4 border-metallic-seaweed rounded h-75 px-0 py-2 p-lg-4">
-            <h3 className="text-center text-metallic-seaweed mb-3">
+        <div className="product-preview d-none d-md-flex justify-content-center flex-wrap col-4 mt-4 border-green-sheen rounded h-75 px-0 py-2 p-lg-4">
+            <h3 className="text-center text-green-sheen mb-3">
                 Vista previa
             </h3>
             <div

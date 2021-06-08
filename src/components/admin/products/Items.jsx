@@ -172,7 +172,7 @@ export default function Items(props) {
 
     const showModalOnDeleteOne = (e) => {
         const div = qS('.modal-info div');
-        const product = JSON.parse(e.target.attributes.dataProduct.value);
+        const product = JSON.parse(e.target.attributes.dataproduct.value);
 
         div.classList.value = 'd-flex flex-column w-50 p-5 rounded shadow bg-green-sheen';
         div.setAttribute('style','border-top: 5px solid #DC3545');
@@ -248,17 +248,17 @@ export default function Items(props) {
 
     return (
         <div className='items-product section pl-4 pl-lg-2 pr-md-0 my-3'>
-            <div className="title bg-metallic-seaweed text-champagne text-left border-metallic-seaweed rounded pl-4 py-2 mt-4">
+            <div className="title bg-opal text-champagne text-left rounded pl-4 py-1 mt-4">
                 <h3>Lista de productos</h3>
             </div>
             <div className='col-12 d-flex align-items-center my-3'>
-                <label htmlFor="order-list-product" className='text-metallic-seaweed mb-0 mr-4 d-none d-sm-flex'>
+                <label htmlFor="order-list-product" className='text-green-sheen mb-0 mr-4 d-none d-sm-flex'>
                     Ordenar por
                 </label>
                 <select
                     name="order-list-product"
                     id="order-list-product"
-                    className='bg-champagne text-metallic-seaweed text-center rounded py-1 px-3'
+                    className='bg-champagne text-green-sheen text-center rounded py-1 px-3'
                     onChange={(e) => {setOrderlistproduct(e.target.value); setProducts([])}}
                 >
                     {
@@ -275,21 +275,21 @@ export default function Items(props) {
                     }
                 </select>
                 <button
-                    className='mx-2 border-0 bg-transparent rounded text-metallic-seaweed'
+                    className='mx-2 border-0 bg-transparent rounded text-green-sheen'
                     style={{border: '1px solid var(--metallic-seaweed)',fontSize: '1.5rem'}}
                     onClick={() => {setOrderbydirection('up'); setProducts([])}}
                 >
-                    <i class={`${orderbydirection === 'up' ? 'fas' : 'far'} fa-arrow-alt-circle-up`}></i>
+                    <i className={`${orderbydirection === 'up' ? 'fas' : 'far'} fa-arrow-alt-circle-up`}></i>
                 </button>
                 <button
-                    className='mx-2 border-0 bg-transparent rounded text-metallic-seaweed'
+                    className='mx-2 border-0 bg-transparent rounded text-green-sheen'
                     style={{border: '1px solid var(--metallic-seaweed)',fontSize: '1.5rem'}}
                     onClick={() => {setOrderbydirection('down'); setProducts([])}}
                 >
-                    <i class={`${orderbydirection === 'down' ? 'fas' : 'far'} fa-arrow-alt-circle-down`}></i>
+                    <i className={`${orderbydirection === 'down' ? 'fas' : 'far'} fa-arrow-alt-circle-down`}></i>
                 </button>
                 <button
-                    className={`delete-select-rows btn-admin ml-auto
+                    className={`delete-select-rows btn-admin btn-green-sheen ml-auto
                         ${producttodelete.length ? '' : 'd-none'}`
                     }
                     onClick={showModalOnDeleteMultiple}
@@ -299,7 +299,7 @@ export default function Items(props) {
             </div>
             <table className="items-list table table-hover table-striped rounded shadow">
                 <thead>
-                    <tr className='text-opal bg-metallic-seaweed'>
+                    <tr className='text-champagne bg-opal'>
                         {
                             productproperties.map( (property, i) => {
                                 return (
@@ -312,19 +312,16 @@ export default function Items(props) {
                 </thead>
                 <tbody>
                     {
-                        products.length
-                            ? products.map( (product, i) => {
-                                return (
-                                    <Row
-                                        product={product}
-                                        selectRow={selectRow}
-                                        showModal={showModalOnDeleteOne}
-                                        paramid={props.paramid}
-                                        setParamid={props.setParamid}
-                                    />
+                        products.map( (product, i) => {
+                            return (
+                                <Row
+                                    key={i}
+                                    product={product}
+                                    selectRow={selectRow}
+                                    showModal={showModalOnDeleteOne}
+                                />
                                 )
-                            })
-                            : ''
+                        })
                     }
                 </tbody>
             </table>

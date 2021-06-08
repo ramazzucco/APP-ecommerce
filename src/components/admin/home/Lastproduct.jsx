@@ -16,17 +16,15 @@ export default function Lastproduct(props) {
     const handlerOnMouseOver = (e) => {
         const content = document.querySelector('.lastproduct .content .info');
         if(content) content.classList.add('h-100');
-        // document.querySelector('.lastproduct header').classList.replace('bg-opal','bg-metallic-seaweed');
     }
     const handlerOnMouseOut = (e) => {
         const content = document.querySelector('.lastproduct .content .info');
         if(content) content.classList.remove('h-100');
-        // document.querySelector('.lastproduct header').classList.replace('bg-metallic-seaweed','bg-opal');
     }
 
     return (
         <div
-            className='lastproduct d-flex flex-wrap align-items-start element-up rounded-top'
+            className='lastproduct d-flex flex-wrap justify-content-center align-items-start element-up rounded-top'
             onMouseOver={handlerOnMouseOver}
             onMouseOut={handlerOnMouseOut}
         >

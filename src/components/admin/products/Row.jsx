@@ -48,7 +48,7 @@ export default function Row(props) {
     return (
         <tr
             id={`p${props.product.id}`}
-            className="text-metallic-seaweed text-lowercase"
+            className="text-green-sheen text-lowercase"
             onDoubleClick={props.selectRow}
         >
             <td className="id">
@@ -93,7 +93,7 @@ export default function Row(props) {
                 <i
                     className="fas fa-trash-alt text-danger"
                     onClick={props.showModal}
-                    dataProduct={JSON.stringify(props.product)}
+                    dataproduct={JSON.stringify(props.product)}
                 ></i>
             </td>
         </tr>

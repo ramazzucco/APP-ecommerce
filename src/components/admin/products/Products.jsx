@@ -36,14 +36,14 @@ export default function Products(props) {
 
     return (
         <div className='products col-12 p-0 mt-3'>
-            <header className='d-flex col-12 p-0 mb-4'>
+            <header className='d-flex col-12 p-3 mb-4 bg-metallic-seaweed rounded'>
                 {
                     buttons.map( (button, i) => {
                         return (
                             <button
                                 key={i}
                                 id={button.id}
-                                className={`bg-transparent text-metallic-seaweed underline mx-3
+                                className={`bg-transparent mx-3
                                     ${buttonactive === button.title ? 'active' : ''}`
                                 }
                                 onClick={() => {
@@ -61,6 +61,7 @@ export default function Products(props) {
             </header>
             <Route exact path='/admin/productos'>
                 <Items
+                    key={'products'}
                     products={props.products}
                     setProducts={props.setProducts}
                 />

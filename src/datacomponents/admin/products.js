@@ -1,5 +1,5 @@
 const getDataForm = (id,handlerSubmit,handlerChange,handlerCancel,categories,inputvalue,) => {
-    const classdivgroup = 'input-group d-flex flex-column justify-content-end col-12 col-md-10 col-lg-8 text-metallic-seaweed mb-2';
+    const classdivgroup = 'input-group d-flex flex-column justify-content-end col-12 col-md-10 col-lg-8 text-green-sheen mb-2';
     const classlabel = 'mb-1';
     const classinput = 'bg-transparent text-champagne-contrast-2 rounded p-2';
 
@@ -11,10 +11,10 @@ const getDataForm = (id,handlerSubmit,handlerChange,handlerCancel,categories,inp
             buttons: {
                 className: 'order-9 d-flex flex-wrap justify-content-start align-items-center col-12 mt-4',
                 submit: {
-                    className: 'btn-admin col-12 col-md-5 col-lg-3 py-2'
+                    className: 'btn-admin btn-metallic-seaweed col-12 col-md-5 col-lg-3 py-2'
                 },
                 button: {
-                    className: 'btn-admin-outline ml-md-4 mt-2 mt-md-0 col-12 col-md-5 col-lg-3 py-2',
+                    className: 'btn-admin-outline btn-champagne ml-md-4 mt-2 mt-md-0 col-12 col-md-5 col-lg-3 py-2',
                     onClick: () => handlerCancel(),
                 }
             }
@@ -31,7 +31,7 @@ const getDataForm = (id,handlerSubmit,handlerChange,handlerCancel,categories,inp
                         icon: ''
                     },
                     select: {
-                        className: classinput + ' py-1 text-metallic-seaweed',
+                        className: classinput + ' py-1 text-green-sheen',
                         classNameOptions: 'bg-champagne',
                         id: "category_id",
                         name: "category_id",

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { urlbase } from '../../services/getInfoPage'
 import { addFavourite, addToCart, closeSubMenues } from '../../services'
 import { generaldataproductcard } from "../../datacomponents/home";
@@ -27,43 +27,43 @@ export default function Detail(props) {
     const amountofunit = Array.from({length: props.product.stock}, () => {return 'something'} );
 
     useEffect(() => {
-        window.scrollTo(0,75)
-
-        if(props.views) setViews(props.views);
-
-        countViewOfProduct();
-    },[])
-
-    useEffect(() => {
-        setViews(props.views);
-    },[props.views])
+        if(views && !views.numero) setViews({...props.views, numero: props.views.numero + 1});
+    },[props.views, views])
 
     useEffect(() => {
         const getquantitywidth = document.querySelector('.info .quantity');
         if(getquantitywidth) setQuantitywidth(getquantitywidth.clientWidth);
     },[props.width])
 
-    const countViewOfProduct = async () => {
+    const countViewOfProduct = useCallback( async () => {
         let newviews;
 
-        if(props.views){
-            newviews = {
-                products_id: props.product.id,
-                numero: props.views.numero + 1
+        if(props.views.numero !== views.numero){
+            if(props.views){
+                newviews = {
+                    products_id: props.product.id,
+                    numero: props.views.numero + 1
+                }
+            } else {
+                newviews = {
+                    products_id: props.product.id,
+                    numero: 1
+                }
             }
-        } else {
-            newviews = {
-                products_id: props.product.id,
-                numero: 1
-            }
+
+            const request = await fetch(urlbase + `/api/product/views?id=${newviews.products_id}&view=${newviews.numero}`);
+            const response = await request.json();
+
+            props.setProducts({...props.products, views: response.data})
+            console.log(response)
         }
+    },[views, props])
 
-        const request = await fetch(urlbase + `/api/product/views?id=${newviews.products_id}&view=${newviews.numero}`);
-        const response = await request.json();
+    useEffect(() => {
+        window.scrollTo(0,75)
 
-        props.setProducts({...props.products, views: response.data})
-        console.log(response)
-    }
+        countViewOfProduct();
+    },[countViewOfProduct])
 
     const writeMessage = (e) => {
         const writemessage = document.querySelector('.writemessage');

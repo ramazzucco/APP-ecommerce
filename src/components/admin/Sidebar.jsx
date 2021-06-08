@@ -110,6 +110,7 @@ export default function Sidebar(props) {
                     links.map( (link, i) => {
                         return !link.onClick ? (
                             <Link
+                                key={i}
                                 to={link.path}
                                 className={link.classname.link}
                                 onClick={() => { props.setActivelink(link.title) }}
@@ -121,13 +122,14 @@ export default function Sidebar(props) {
                             </Link>
                         )
                         : <p
+                            key={i}
                             className={link.classname.link + ' logout pointer'}
                             onClick={link.onClick}
                         >
                             {link.icon}
-                            <p className={link.classname.title}>
+                            <span className={link.classname.title}>
                                 {link.title}
-                            </p>
+                            </span>
                         </p>
                     })
                 }

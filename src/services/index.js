@@ -351,6 +351,77 @@ const productListBy = () => {
     }
 }
 
+const usersListBy = () => {
+    const id = (a,b) => {
+        if (a.id > b.id) {
+            return 1;
+        }
+        if (a.id < b.id) {
+            return -1;
+        }
+        return 0;
+    }
+
+    const name = (a,b) => {
+        if (a.name > b.name) {
+            return 1;
+        }
+        if (a.name < b.name) {
+            return -1;
+        }
+        return 0;
+    }
+
+    const email = (a,b) => {
+        if (a.email > b.email) {
+            return 1;
+        }
+        if (a.email < b.email) {
+            return -1;
+        }
+        return 0;
+    }
+
+    const address = (a,b) => {
+        if (a.address > b.address) {
+            return 1;
+        }
+        if (a.address < b.address) {
+            return -1;
+        }
+        return 0;
+    };
+
+    const city = (a,b) => {
+        if (a.city > b.city) {
+            return 1;
+        }
+        if (a.city < b.city) {
+            return -1;
+        }
+        return 0;
+    }
+
+    const status = (a,b) => {
+        if (Number(a.status) > Number(b.status)) {
+            return 1;
+        }
+        if (Number(a.status) < Number(b.status)) {
+            return -1;
+        }
+        return 0;
+    }
+
+    return {
+        id,
+        name,
+        email,
+        address,
+        city,
+        status
+    }
+}
+
 const compareObjects = (obj1,obj2) => {
     const haschange = [];
 
@@ -388,5 +459,6 @@ export {
     gEbID,
     modal,
     productListBy,
+    usersListBy,
     compareObjects
 }

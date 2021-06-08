@@ -72,7 +72,7 @@ export default function Header(props) {
 
         if(!response.length){
             response.push(
-                <p className='option-search-admin pl-3 py-1 pointer mb-0 text-lowercase'>
+                <p className='option-search-admin pl-3 py-1 pointer mb-0 text-lowercase' key={'product'}>
                     No se ha encontrado nada con "{datasearch}"
                 </p>
             )
@@ -108,7 +108,7 @@ export default function Header(props) {
 
         if(!response.length){
             response.push(
-                <p className='option-search-admin pl-3 py-1 pointer mb-0 text-lowercase'>
+                <p className='option-search-admin pl-3 py-1 pointer mb-0 text-lowercase' key={'user'}>
                     No se ha encontrado nada con "{datasearch}"
                 </p>
             )
@@ -127,7 +127,7 @@ export default function Header(props) {
                     id="search-option"
                     onChange={(e) => setSearchoption(e.target.value)}
                 >
-                    <option selected disabled>Buscar en</option>
+                    <option defaultValue='true' disabled>Buscar en</option>
                     <option value="products">Productos</option>
                     <option value="users">Usuarios</option>
                 </select>
@@ -156,11 +156,14 @@ export default function Header(props) {
 
             <div className="avatar col-12 col-md-2 col-lg-3 p-md-0 d-flex justify-content-end align-items-center align-items-md-center my-2">
                 <div className="icons col-1 p-0 d-flex justify-content-end align-items-center mr-5">
-                    <i
-                        className="fas fa-bell admin text-opal"
-                        onMouseOver={(e) => e.target.classList.replace('text-opal','text-metallic-seaweed')}
-                        onMouseOut={(e) => e.target.classList.replace('text-metallic-seaweed','text-opal')}
-                    ></i>
+                    <span className='badge notifications position-absolute text-champagne bg-success rounded-circle' style={{top: '-15px', right: '-10px'}}>
+                        {
+                            props.incommingmessages.length
+                                ? props.incommingmessages.length
+                                : ''
+                        }
+                    </span>
+                    <i className="fas fa-bell admin text-opal"></i>
                 </div>
                 <div
                     className="image rounded-circle overflow-hidden d-flex justify-content-center align-items-center"
